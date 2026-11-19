@@ -3,7 +3,7 @@
 #include <cmath>
 #include <string>
 
-#include "anim/animancer/Event.h"
+#include "anim/hobi/Event.h"
 
 using namespace anim;
 
@@ -53,7 +53,7 @@ TEST(EventSequence, EndEventAndNames) {
     EXPECT_EQ(sequence.indexOf("Land"), 1);
     EXPECT_EQ(sequence.indexOf("Missing"), -1);
 
-    sequence.endEvent() = AnimancerEvent(1.0f, [] {}, "End");
+    sequence.endEvent() = HobiEvent(1.0f, [] {}, "End");
     EXPECT_EQ(sequence.endEvent().name, "End");
     EXPECT_FLOAT_EQ(sequence.normalizedEndTime(), 1.0f);
 }
@@ -61,7 +61,7 @@ TEST(EventSequence, EndEventAndNames) {
 TEST(EventSequence, CopyFromCopiesEventsAndEnd) {
     EventSequence source;
     source.add(0.25f, [] {}, "A");
-    source.endEvent() = AnimancerEvent(0.9f, [] {}, "End");
+    source.endEvent() = HobiEvent(0.9f, [] {}, "End");
 
     EventSequence copy;
     copy.copyFrom(source);

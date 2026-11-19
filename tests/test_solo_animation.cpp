@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "anim/animancer/SoloAnimation.h"
+#include "anim/hobi/SoloAnimation.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 

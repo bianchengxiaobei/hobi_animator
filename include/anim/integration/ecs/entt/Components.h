@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
+#include "anim/hobi/HobiAnimator.h"
 #include "anim/core/Math.h"
 #include "anim/graph/PlayableHandle.h"
 #include "anim/jobs/IAnimationJob.h"
@@ -16,8 +16,8 @@
 namespace anim::ecs {
 
 // 一个实体对应一个角色。animator 由外部创建并保证生命周期长于 registry 中的组件。
-struct AnimancerComponent {
-    AnimancerAnimator* animator = nullptr;
+struct HobiComponent {
+    HobiAnimator* animator = nullptr;
     std::vector<PlayableHandle> jobHandles;
 };
 

@@ -13,20 +13,20 @@ L7 层：把动画系统接入你的 C++ 引擎。本库本身**不含任何 bgf
 ## 2. 集成对象
 
 ```cpp
-// include/anim/animancer/AnimancerAnimator.h
-class AnimancerAnimator {
+// include/anim/hobi/HobiAnimator.h
+class HobiAnimator {
 public:
     void initialize(Skeleton& skeleton);   // 创建 PlayableGraph + Output
     void destroy();
 
-    AnimancerPlayable& playable();
-    AnimancerLayer* layer(int index);
+    HobiPlayable& playable();
+    HobiLayer* layer(int index);
 
-    AnimancerState* play(const Clip&);
-    AnimancerState* play(const Clip&, float fadeDuration,
+    HobiState* play(const Clip&);
+    HobiState* play(const Clip&, float fadeDuration,
                          FadeMode mode = FadeMode::FixedSpeed);
-    AnimancerState* play(ITransition&);
-    AnimancerState* play(ITransition&, float fadeDuration,
+    HobiState* play(ITransition&);
+    HobiState* play(ITransition&, float fadeDuration,
                          FadeMode mode = FadeMode::FixedSpeed);
     void stop();
     bool isPlaying() const;
@@ -71,13 +71,13 @@ void Game::update(float dt) {
 ```
 - 固定步长/可变步长：`update(dt)` 支持任意 dt；事件与根运动依赖 dt。
 - 暂停：`playable().pauseGraph()` / `unpauseGraph()`（对齐原项目）。
-- 多实例：**每个角色一个 AnimancerPlayable**（原项目也是每 Animator 一个图）。
+- 多实例：**每个角色一个 HobiPlayable**（原项目也是每 Animator 一个图）。
 
 ## 5. 线程与 Job（ECS 可选）
 
 - 初版：单线程（主线程更新）。简单、与原始行为一致。
 - 任务调度：核心只依赖 `IJobScheduler`（默认 `InlineJobScheduler` = 同步执行）；可注入并行后端（enkiTS/Taskflow/引擎自带）。
-- ECS（可选）：若引擎用 **EnTT**，用组件存 `AnimancerAnimator*/Pose/JobList/Palette`，用系统遍历；但**并行仍由 `IJobScheduler` 执行**（EnTT 无线程池）。详见 [16](16-任务调度与ECS集成.md)。
+- ECS（可选）：若引擎用 **EnTT**，用组件存 `HobiAnimator*/Pose/JobList/Palette`，用系统遍历；但**并行仍由 `IJobScheduler` 执行**（EnTT 无线程池）。详见 [16](16-任务调度与ECS集成.md)。
 - 优化现状：
   1. 跨角色并行图求值（角色彼此独立）。
   2. `Transform` 按 Unity `math::xform` 的 3×float4（t/q/s）对齐，Blend 的累加/归一化
@@ -112,7 +112,7 @@ void Game::update(float dt) {
 ```cpp
 // 引擎侧
 Skeleton skel = LoadSkeleton("character.glb");
-AnimancerAnimator anim;
+HobiAnimator anim;
 anim.initialize(skel);
 
 auto* clip = LoadClip("Walk.ab");
@@ -127,7 +127,7 @@ if (skinningEnabled)
 ## 9. 文件清单
 
 ```
-include/anim/animancer/AnimancerAnimator.h
+include/anim/hobi/HobiAnimator.h
 include/anim/integration/Skinning.h          // 调色板上传（引擎无关接口）
 samples/bgfx_demo/main.cpp                   // bgfx 接线示例
 ```
@@ -145,7 +145,7 @@ samples/bgfx_demo/main.cpp                   // bgfx 接线示例
 
 | 文件 | 内容 |
 |---|---|
-| `include/anim/animancer/AnimancerAnimator.h` / `src/...cpp` | `initialize` 创建 PlayableGraph，`update(dt)` 先求值再 `computePalette`，`consumeRootMotion()` |
+| `include/anim/hobi/HobiAnimator.h` / `src/...cpp` | `initialize` 创建 PlayableGraph，`update(dt)` 先求值再 `computePalette`，`consumeRootMotion()` |
 | `include/anim/integration/Skinning.h` / `src/integration/Skinning.cpp` | `SkinningPalette`、`ISkinningUploader`、`transposePalette`（glm 列主序 → bgfx 行主序） |
 | `include/anim/integration/Coordinate.h` | `flipZ` 原语（Transform/Quat/Mat4/Pose/Palette），双次镜像=原值 |
 | `include/anim/jobs/ThreadPoolJobScheduler.h` / `src/jobs/ThreadPoolJobScheduler.cpp` | 依赖计数任务图、`waitAll`、`parallelFor` |
@@ -217,7 +217,7 @@ bgfx_demo.exe --model "../Assets/Plugins/Animancer/Examples/Art/Spider Bot/Spide
   P8.6 的文档/命令已完成；支持 `skeleton.json` 的可选 `inverseBind`、
   `anim_manifest.json` 读取、离线 `anim_pack`（GLB/glTF → `.ab` + skeleton +
   manifest）、Blender Marker sidecar、运行时 `AnimationClipLibrary`/`AnimationTransitions`
-  （事件 + rootBone）、headless `anim_pack_demo --manifest`，以及 `AnimancerAnimator`
+  （事件 + rootBone）、headless `anim_pack_demo --manifest`，以及 `HobiAnimator`
   的 fade/stop/isPlaying/layer 门面；Unity `.anim` 转换路径保持不变。
 
 ### 11.4 Humanoid retarget 视觉验收
@@ -244,7 +244,7 @@ build/samples/bgfx_demo/Release/humanoid_retarget_demo.exe \
 ### 11.5 并行与基准
 
 `ThreadPoolJobScheduler` 已可作为 `IJobScheduler` 注入（`ScriptPoseNode` 的 job）。
-跨角色并行需要在引擎侧按角色调用 `AnimancerAnimator::update`，再 `waitAll` 后上传调色板。
+跨角色并行需要在引擎侧按角色调用 `HobiAnimator::update`，再 `waitAll` 后上传调色板。
 本机 Release 实测（Ryzen 级 16 线程，仅动画更新+调色板，不含 GPU）：
 
 | 场景 | 200 角色 × 64 骨 × 300 帧 |

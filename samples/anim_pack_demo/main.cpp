@@ -8,11 +8,11 @@
 #include <vector>
 
 #include "SkeletonLoader.h"
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/Transition.h"
-#include "anim/animancer/rootmotion/Targets.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/Transition.h"
+#include "anim/hobi/rootmotion/Targets.h"
 #include "anim/clip/ClipIO.h"
 #include "anim/integration/AnimationClipLibrary.h"
 #include "anim/integration/AnimationManifest.h"
@@ -167,11 +167,11 @@ int main(int argc, char** argv) {
 
     anim::Transform character;
     anim::RootMotionToTransform rootTarget(&character);
-    anim::AnimancerAnimator animator;
+    anim::HobiAnimator animator;
     animator.initialize(skeleton.skeleton);
     animator.playable().setRootMotionTarget(&rootTarget);
 
-    anim::AnimancerState* state = nullptr;
+    anim::HobiState* state = nullptr;
     if (!options.manifest.empty()) {
         state = transitions.play(animator, activeName, &error);
     } else {

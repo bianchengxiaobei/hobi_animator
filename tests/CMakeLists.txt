@@ -22,9 +22,9 @@ add_executable(anim_tests
     test_events.cpp
     test_fade.cpp
     test_layer.cpp
-    test_animancer.cpp
+    test_hobi.cpp
     test_solo_animation.cpp
-    test_named_animancer.cpp
+    test_named_hobi.cpp
     test_clip_collection.cpp
     test_mixers.cpp
     test_transition_sequence.cpp

@@ -43,7 +43,7 @@ Unity 的 **Animation Jobs** 指的是：
 1. **核心不绑定 ECS**：`IAnimationJob` 与 `IJobScheduler` 是普通 C++ 接口；`anim` 静态库仅依赖 glm。
 2. **是否用 EnTT：可用，但仅作 ECS 适配层。**
    - 若你的引擎已经是 EnTT ECS → 用 EnTT 存动画组件、用 `view` 驱动系统；**并行仍由 `IJobScheduler` 执行**。
-   - 若引擎不用 ECS → 不用 EnTT，直接 `IJobScheduler` + 自管 `std::vector<AnimancerAnimator*>`。
+   - 若引擎不用 ECS → 不用 EnTT，直接 `IJobScheduler` + 自管 `std::vector<HobiAnimator*>`。
    - EnTT 作为**可选依赖**（编译开关 `ANIM_ENABLE_ENTT`），不进入核心库。
 3. **并行由 Job Scheduler 负责**：默认提供“单线程后端”，可替换为 enkiTS/Taskflow/引擎自带。
 4. **跨角色并行是主收益**：角色之间无依赖；单个角色内部有依赖（采样→混合→IK→调色板），用依赖图串起来。
@@ -110,7 +110,7 @@ class InlineJobScheduler : public IJobScheduler { /* 立即执行 */ };
 
 ```cpp
 // include/anim/integration/ecs/entt/Components.h  (仅当 ANIM_ENABLE_ENTT)
-struct AnimancerComponent   { AnimancerAnimator* animator = nullptr;
+struct HobiComponent   { HobiAnimator* animator = nullptr;
                               std::vector<PlayableHandle> jobHandles; };
 struct JobListComponent     { std::vector<IAnimationJob*> jobs; };
 struct PoseComponent        { Pose pose; };                 // 可选副本
@@ -155,7 +155,7 @@ upload palettes -> bgfx
 ```
 
 时序要求（与 Unity 一致）：
-- 事件（EventDispatcher）在 post-update 阶段、**在所有图求值之后**执行（[07 §9](07-Animancer门面.md)）。
+- 事件（EventDispatcher）在 post-update 阶段、**在所有图求值之后**执行（[07 §9](07-Hobi门面.md)）。
 - IK/调色板在事件之后、渲染上传之前。
 
 ## 6. 并行策略
@@ -195,7 +195,7 @@ upload palettes -> bgfx
 
 ## 9. 何时不需要 EnTT
 
-- 引擎非 ECS：用 `std::vector<AnimancerAnimator*>` + `IJobScheduler` 即可。
+- 引擎非 ECS：用 `std::vector<HobiAnimator*>` + `IJobScheduler` 即可。
 - 角色数少、以逻辑为主：单线程 `InlineJobScheduler`。
 - 只要 IK/根运动、不追求大规模并行：不引入 ECS。
 

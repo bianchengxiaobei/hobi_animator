@@ -36,7 +36,7 @@
 │  ├─ skeleton/          # Skeleton / Bone / Pose / 混合 / 调色板
 │  ├─ avatar/            # 人形 Avatar、肌肉空间、重定向
 │  ├─ graph/             # Playable 图（Node / Handle / Output）
-│  ├─ animancer/         # 门面层（Playable / Layer / State / Transition / Fade / Events / FSM）
+│  ├─ hobi/              # 门面层（Playable / Layer / State / Transition / Fade / Events / FSM）
 │  ├─ jobs/              # IAnimationJob + IJobScheduler + IK / Damping / Lean
 │  └─ integration/       # 引擎/主循环集成、调色板上传、坐标转换、可选 ECS 适配
 ├─ src/                  # 与 include 镜像的实现
@@ -73,7 +73,7 @@ ctest --test-dir build -C Debug --output-on-failure
 ## 最小使用示例
 
 ```cpp
-#include "anim/animancer/AnimancerAnimator.h"
+#include "anim/hobi/HobiAnimator.h"
 #include "anim/clip/ClipIO.h"
 
 // 1) 读取离线烘焙的 Clip
@@ -86,8 +86,8 @@ anim::Skeleton skeleton;
 int hips = skeleton.addBone(anim::hashString("Hips"), -1, hipsRest);
 int spine = skeleton.addBone(anim::hashString("Spine"), hips, spineRest);
 
-// 3) 每个角色一个 AnimancerAnimator
-anim::AnimancerAnimator animator;
+// 3) 每个角色一个 HobiAnimator
+anim::HobiAnimator animator;
 animator.initialize(skeleton);
 animator.play(*clip, 0.25f, anim::FadeMode::FixedSpeed);
 
@@ -161,7 +161,7 @@ build/samples/bgfx_demo/Release/bgfx_demo.exe --clip build/ab/Walk.ab `
 | [04-骨架与位姿](docs/04-骨架与位姿.md) | Skeleton/Bone/Pose、混合、调色板、根运动提取 |
 | [05-人形肌肉空间与重定向](docs/05-人形肌肉空间与重定向.md) | HumanBone、肌肉表、muscle↔local、T-Pose、IK、对拍 |
 | [06-Playable图](docs/06-Playable图.md) | Graph/Node/Handle/Output、加权、双阶段更新、命令 |
-| [07-门面层](docs/07-Animancer门面.md) | Playable/Layer/State/StateDictionary/Transition/Fade/Events |
+| [07-门面层](docs/07-Hobi门面.md) | Playable/Layer/State/StateDictionary/Transition/Fade/Events |
 | [08-混合器](docs/08-混合器.md) | Manual/Linear/Directional/Cartesian 权重算法 |
 | [09-状态机FSM](docs/09-状态机FSM.md) | StateMachine、WithDefault、InputBuffer、StateChange |
 | [10-根运动与Animation-Jobs](docs/10-根运动与Animation-Jobs.md) | 根运动重定向、TwoBoneIK、Damping、Lean、Animated 属性 |

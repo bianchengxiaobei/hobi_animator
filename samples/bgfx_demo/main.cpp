@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/clip/Clip.h"
 #include "anim/clip/ClipIO.h"
 #include "anim/integration/Skinning.h"
@@ -319,7 +319,7 @@ int main(int argc, char** argv) {
     windowClass.lpfnWndProc = windowProc;
     windowClass.hInstance = instance;
     windowClass.hCursor = LoadCursorW(nullptr, MAKEINTRESOURCEW(32512));
-    windowClass.lpszClassName = L"AnimancerBgfxDemo";
+    windowClass.lpszClassName = L"HobiBgfxDemo";
     if (RegisterClassExW(&windowClass) == 0) {
         std::cerr << "RegisterClassEx failed\n";
         return 1;
@@ -327,7 +327,7 @@ int main(int argc, char** argv) {
 
     RECT rect{0, 0, options.width, options.height};
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
-    if (!options.headless) window = CreateWindowExW(0, windowClass.lpszClassName, L"AnimancerCpp bgfx demo",
+    if (!options.headless) window = CreateWindowExW(0, windowClass.lpszClassName, L"hobi_animator bgfx demo",
                                   WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
                                   rect.right - rect.left, rect.bottom - rect.top, nullptr,
                                   nullptr, instance, nullptr);
@@ -402,7 +402,7 @@ int main(int argc, char** argv) {
     Bounds bounds;
     for (const demo::SkinVertex& vertex : model.vertices) bounds.add(vertex);
 
-    anim::AnimancerAnimator animator;
+    anim::HobiAnimator animator;
     animator.initialize(model.skeleton, avatar);
     animator.playable().defaultFadeDuration = 0.0f;
     animator.play(*clip);

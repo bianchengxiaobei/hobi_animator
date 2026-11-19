@@ -3,7 +3,7 @@
 #include <entt/entt.hpp>
 
 #include "Components.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/jobs/JobScheduler.h"
 
 // EnTT 系统：实体遍历在 ECS 层，角色内部 job 仍由图输出链串行执行。
@@ -11,16 +11,16 @@
 // 分片版本（见 docs/16 §5）。
 namespace anim::ecs {
 
-// 把 JobListComponent 中的 job 插入 AnimancerPlayable 的输出链。
+// 把 JobListComponent 中的 job 插入 HobiPlayable 的输出链。
 // 应在角色创建后调用一次；重复调用会先移除旧 job，避免重复执行。
 inline void bindAnimationJobs(entt::registry& registry) {
-    auto view = registry.view<AnimancerComponent, JobListComponent>();
+    auto view = registry.view<HobiComponent, JobListComponent>();
     for (entt::entity entity : view) {
-        auto& component = view.get<AnimancerComponent>(entity);
+        auto& component = view.get<HobiComponent>(entity);
         auto& list = view.get<JobListComponent>(entity);
         if (component.animator == nullptr) continue;
 
-        AnimancerPlayable& playable = component.animator->playable();
+        HobiPlayable& playable = component.animator->playable();
         for (PlayableHandle handle : component.jobHandles) playable.removePlayable(handle);
         component.jobHandles.clear();
 
@@ -33,9 +33,9 @@ inline void bindAnimationJobs(entt::registry& registry) {
 // 推进每个角色的图。job 已在输出链中，因此顺序为：
 // 采样 → 混合 → job → 根运动提取。
 inline void animationGraphSystem(entt::registry& registry, float deltaTime) {
-    auto view = registry.view<AnimancerComponent>();
+    auto view = registry.view<HobiComponent>();
     for (entt::entity entity : view) {
-        AnimancerComponent& component = view.get<AnimancerComponent>(entity);
+        HobiComponent& component = view.get<HobiComponent>(entity);
         if (component.animator != nullptr) component.animator->update(deltaTime);
     }
 }
@@ -43,11 +43,11 @@ inline void animationGraphSystem(entt::registry& registry, float deltaTime) {
 // 跨角色并行版本；不同角色的图/job 相互独立。
 inline void animationGraphSystem(entt::registry& registry, IJobScheduler& scheduler,
                                  float deltaTime) {
-    std::vector<AnimancerAnimator*> animators;
-    auto view = registry.view<AnimancerComponent>();
+    std::vector<HobiAnimator*> animators;
+    auto view = registry.view<HobiComponent>();
     animators.reserve(view.size());
     for (entt::entity entity : view) {
-        AnimancerComponent& component = view.get<AnimancerComponent>(entity);
+        HobiComponent& component = view.get<HobiComponent>(entity);
         if (component.animator != nullptr) animators.push_back(component.animator);
     }
 
@@ -58,9 +58,9 @@ inline void animationGraphSystem(entt::registry& registry, IJobScheduler& schedu
 
 // 把 animator 的输出复制到可选组件，便于渲染/其他 ECS 系统读取。
 inline void syncAnimationOutputs(entt::registry& registry) {
-    auto view = registry.view<AnimancerComponent>();
+    auto view = registry.view<HobiComponent>();
     for (entt::entity entity : view) {
-        AnimancerComponent& component = view.get<AnimancerComponent>(entity);
+        HobiComponent& component = view.get<HobiComponent>(entity);
         if (component.animator == nullptr) continue;
 
         if (PoseComponent* pose = registry.try_get<PoseComponent>(entity)) {

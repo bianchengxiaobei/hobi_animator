@@ -3,9 +3,9 @@
 #include <cmath>
 #include <utility>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
 #include "anim/core/Hash.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -130,7 +130,7 @@ const ClipTransition* AnimationTransitions::transition(int index) const noexcept
     return _entries[static_cast<std::size_t>(index)].transition.get();
 }
 
-AnimancerState* AnimationTransitions::play(AnimancerAnimator& animator,
+HobiState* AnimationTransitions::play(HobiAnimator& animator,
                                            std::string_view name, std::string* error) {
     if (error != nullptr) error->clear();
 
@@ -144,14 +144,14 @@ AnimancerState* AnimationTransitions::play(AnimancerAnimator& animator,
 
     if (!bindRootBone(animator, name, error)) return nullptr;
 
-    AnimancerState* state = animator.play(*transition);
+    HobiState* state = animator.play(*transition);
     if (state == nullptr && error != nullptr) {
         *error = "cannot create a state for animation '" + std::string(name) + "'";
     }
     return state;
 }
 
-bool AnimationTransitions::bindRootBone(AnimancerAnimator& animator, std::string_view name,
+bool AnimationTransitions::bindRootBone(HobiAnimator& animator, std::string_view name,
                                         std::string* error) const {
     if (error != nullptr) error->clear();
 

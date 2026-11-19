@@ -8,9 +8,9 @@
 #include <string>
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
 #include "anim/clip/ClipIO.h"
 #include "anim/core/Transform.h"
 #include "anim/integration/AnimationClipLibrary.h"
@@ -205,10 +205,10 @@ TEST(AnimationTransitions, PlaysWithManifestRootBoneAndEvents) {
     AnimationTransitions transitions;
     ASSERT_TRUE(transitions.build(library, callbacks, error)) << error;
 
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
-    AnimancerState* state = transitions.play(animator, "Walk", &error);
+    HobiState* state = transitions.play(animator, "Walk", &error);
     ASSERT_NE(state, nullptr) << error;
     EXPECT_EQ(animator.playable().rootMotionRootBone(), 1);
     EXPECT_NEAR(state->normalizedTime(), 0.2f, 1e-5f);
@@ -264,7 +264,7 @@ TEST(AnimationTransitions, BindsEmptyRootBoneAndRejectsUnknownBone) {
     AnimationTransitions transitions;
     ASSERT_TRUE(transitions.build(library, {}, error)) << error;
 
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     ASSERT_NE(transitions.play(animator, "Wave", &error), nullptr) << error;
@@ -302,8 +302,8 @@ TEST(AnimationTransitions, KeepsEventContextsPerCharacter) {
     ASSERT_TRUE(first.build(library, firstCallbacks, error)) << error;
     ASSERT_TRUE(second.build(library, secondCallbacks, error)) << error;
 
-    AnimancerAnimator firstAnimator;
-    AnimancerAnimator secondAnimator;
+    HobiAnimator firstAnimator;
+    HobiAnimator secondAnimator;
     firstAnimator.initialize(skeleton);
     secondAnimator.initialize(skeleton);
 

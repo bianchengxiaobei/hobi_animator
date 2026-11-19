@@ -72,7 +72,7 @@ public:
     void setLooping(bool looping) noexcept { _looping = looping; }
 
     // 默认 true：prepareFrame 自动推进 time。
-    // AnimancerState 自己管理时间时应设为 false，避免双重推进。
+    // HobiState 自己管理时间时应设为 false，避免双重推进。
     bool autoAdvanceTime() const noexcept { return _autoAdvanceTime; }
     void setAutoAdvanceTime(bool value) noexcept { _autoAdvanceTime = value; }
 

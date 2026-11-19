@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include "anim/animancer/AnimancerLayer.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/LayerList.h"
+#include "anim/hobi/HobiLayer.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/LayerList.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -25,13 +25,13 @@ BoneLocalClip makeClip(float length) {
 
 }  // namespace
 
-TEST(AnimancerFade, WeightSetterClearsFade) {
+TEST(HobiFade, WeightSetterClearsFade) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
     ASSERT_NE(state, nullptr);
     EXPECT_FLOAT_EQ(state->weight(), 1.0f);
 
@@ -45,26 +45,26 @@ TEST(AnimancerFade, WeightSetterClearsFade) {
     EXPECT_FLOAT_EQ(state->fadeSpeed(), 0.0f);
 }
 
-TEST(AnimancerFade, StartFadeZeroDurationIsInfiniteSpeed) {
+TEST(HobiFade, StartFadeZeroDurationIsInfiniteSpeed) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
 
     state->startFade(0.0f, 0.0f);
     EXPECT_TRUE(std::isinf(state->fadeSpeed()));
     EXPECT_GT(state->fadeSpeed(), 0.0f);
 }
 
-TEST(AnimancerFade, EffectiveWeightMultipliesParents) {
+TEST(HobiFade, EffectiveWeightMultipliesParents) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
 
     root.layers().getLayer(0)->setWeight(0.5f);
     state->setWeight(0.5f);
@@ -72,17 +72,17 @@ TEST(AnimancerFade, EffectiveWeightMultipliesParents) {
     EXPECT_FLOAT_EQ(state->effectiveWeight(), 0.25f);
 }
 
-TEST(AnimancerFade, CrossFadeMovesWeightsOverTime) {
+TEST(HobiFade, CrossFadeMovesWeightsOverTime) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
 
-    AnimancerLayer* layer = root.layers().getLayer(0);
-    AnimancerState* a = layer->play(clipA);
-    AnimancerState* b = layer->play(clipB, 0.5f, FadeMode::FixedDuration);
+    HobiLayer* layer = root.layers().getLayer(0);
+    HobiState* a = layer->play(clipA);
+    HobiState* b = layer->play(clipB, 0.5f, FadeMode::FixedDuration);
 
     ASSERT_NE(a, b);
     EXPECT_EQ(layer->currentState(), b);
@@ -97,28 +97,28 @@ TEST(AnimancerFade, CrossFadeMovesWeightsOverTime) {
     EXPECT_FALSE(a->isPlaying());
 }
 
-TEST(AnimancerFade, ZeroDurationPlayIsImmediate) {
+TEST(HobiFade, ZeroDurationPlayIsImmediate) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
 
-    AnimancerLayer* layer = root.layers().getLayer(0);
+    HobiLayer* layer = root.layers().getLayer(0);
     layer->play(clipA);
-    AnimancerState* b = layer->play(clipB, 0.0f, FadeMode::FixedDuration);
+    HobiState* b = layer->play(clipB, 0.0f, FadeMode::FixedDuration);
 
     EXPECT_FLOAT_EQ(b->weight(), 1.0f);
 }
 
-TEST(AnimancerFade, EffectiveSpeedMultipliesHierarchy) {
+TEST(HobiFade, EffectiveSpeedMultipliesHierarchy) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
 
     root.setSpeed(0.5f);
     root.layers().getLayer(0)->setSpeed(1.0f);

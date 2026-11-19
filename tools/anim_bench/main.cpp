@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/clip/Clip.h"
 #include "anim/jobs/ThreadPoolJobScheduler.h"
 #include "anim/skeleton/Skeleton.h"
@@ -72,10 +72,10 @@ int main(int argc, char** argv) {
     anim::Skeleton skeleton = makeSkeleton(bones);
     anim::BoneLocalClip clip = makeClip(bones, 1.0f);
 
-    std::vector<std::unique_ptr<anim::AnimancerAnimator>> animators;
+    std::vector<std::unique_ptr<anim::HobiAnimator>> animators;
     animators.reserve(static_cast<std::size_t>(characters));
     for (int i = 0; i < characters; ++i) {
-        auto animator = std::make_unique<anim::AnimancerAnimator>();
+        auto animator = std::make_unique<anim::HobiAnimator>();
         animator->initialize(skeleton);
         animator->playable().defaultFadeDuration = 0.0f;
         animator->play(clip);

@@ -2,16 +2,16 @@
 
 #include <cmath>
 
-#include "anim/animancer/AnimancerLayer.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/DontAllowFade.h"
-#include "anim/animancer/ExitEvent.h"
-#include "anim/animancer/LayerList.h"
-#include "anim/animancer/MixerParameterTween.h"
-#include "anim/animancer/MixerStates.h"
-#include "anim/animancer/TimeSynchronizationGroup.h"
-#include "anim/animancer/TimeSynchronizer.h"
+#include "anim/hobi/HobiLayer.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/DontAllowFade.h"
+#include "anim/hobi/ExitEvent.h"
+#include "anim/hobi/LayerList.h"
+#include "anim/hobi/MixerParameterTween.h"
+#include "anim/hobi/MixerStates.h"
+#include "anim/hobi/TimeSynchronizationGroup.h"
+#include "anim/hobi/TimeSynchronizer.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -35,65 +35,65 @@ BoneLocalClip makeClip(float length) {
 
 TEST(TimeSynchronizer, StoresAndAppliesNormalizedTime) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(2.0f);
     const BoneLocalClip clipB = makeClip(2.0f);
-    AnimancerState* stateA = root.play(clipA);
+    HobiState* stateA = root.play(clipA);
 
     stateA->setTime(0.5f);
     TimeSynchronizer<int> sync(1);
     sync.storeTime(stateA);
     EXPECT_DOUBLE_EQ(sync.normalizedTime, 0.25);
 
-    AnimancerState* stateB = root.play(clipB);
+    HobiState* stateB = root.play(clipB);
     EXPECT_TRUE(sync.syncTime(stateB, 1, 0.0f));
     EXPECT_FLOAT_EQ(stateB->time(), 0.5f);
 }
 
 TEST(TimeSynchronizer, LayerOverloadsUseLayerCurrentState) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(2.0f);
     const BoneLocalClip clipB = makeClip(2.0f);
-    AnimancerLayer* layer = root.layers().getLayer(0);
-    AnimancerState* stateA = layer->play(clipA);
+    HobiLayer* layer = root.layers().getLayer(0);
+    HobiState* stateA = layer->play(clipA);
     stateA->setTime(0.5f);
 
     TimeSynchronizer<int> sync(1);
     sync.storeTime(layer);
     EXPECT_DOUBLE_EQ(sync.normalizedTime, 0.25);
 
-    AnimancerState* stateB = layer->play(clipB);
+    HobiState* stateB = layer->play(clipB);
     EXPECT_TRUE(sync.syncTime(layer, 1, 0.0f));
     EXPECT_FLOAT_EQ(stateB->time(), 0.5f);
 }
 
 TEST(TimeSynchronizer, GroupChangesSkipFirstSyncAndDefaultGroupIsOptional) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(2.0f);
     const BoneLocalClip clipB = makeClip(2.0f);
     const BoneLocalClip clipC = makeClip(2.0f);
-    AnimancerState* stateA = root.play(clipA);
+    HobiState* stateA = root.play(clipA);
     stateA->setTime(0.5f);
 
     TimeSynchronizer<int> sync(1);
     sync.storeTime(stateA);
 
-    AnimancerState* stateB = root.play(clipB);
+    HobiState* stateB = root.play(clipB);
     EXPECT_FALSE(sync.syncTime(stateB, 2, 0.0f));
     EXPECT_EQ(sync.currentGroup, 2);
     EXPECT_FLOAT_EQ(stateB->time(), 0.0f);
 
     stateB->setTime(0.8f);
     sync.storeTime(stateB);
-    AnimancerState* stateC = root.play(clipC);
+    HobiState* stateC = root.play(clipC);
     EXPECT_TRUE(sync.syncTime(stateC, 2, 0.0f));
     EXPECT_NEAR(stateC->time(), 0.8f, 1e-5f);
 
@@ -108,12 +108,12 @@ TEST(TimeSynchronizer, GroupChangesSkipFirstSyncAndDefaultGroupIsOptional) {
 
 TEST(TimeSynchronizationGroup, StoresAndSyncsSelectedKeys) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(2.0f);
     const BoneLocalClip clipB = makeClip(2.0f);
-    AnimancerState* stateA = root.play(clipA);
+    HobiState* stateA = root.play(clipA);
 
     int keyA = 1;
     int keyB = 2;
@@ -124,7 +124,7 @@ TEST(TimeSynchronizationGroup, StoresAndSyncsSelectedKeys) {
     EXPECT_TRUE(group.storeTime(&keyA, stateA));
     EXPECT_FLOAT_EQ(group.normalizedTime.value(), 0.25f);
 
-    AnimancerState* stateB = root.play(clipB);
+    HobiState* stateB = root.play(clipB);
     EXPECT_TRUE(group.syncTime(&keyA, stateB, 0.0f));
     EXPECT_FLOAT_EQ(stateB->time(), 0.5f);
     EXPECT_FALSE(group.syncTime(&keyB, stateB, 0.0f));
@@ -134,13 +134,13 @@ TEST(TimeSynchronizationGroup, StoresAndSyncsSelectedKeys) {
     EXPECT_TRUE(group.storeTime(&keyB));
     EXPECT_FLOAT_EQ(group.normalizedTime.value(), 0.4f);
 
-    group.setAnimancer(nullptr);
+    group.setPlayable(nullptr);
     EXPECT_FALSE(group.normalizedTime.has_value());
 }
 
 TEST(MixerParameterTween, InterpolatesAndStopsAtTarget) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
@@ -167,7 +167,7 @@ TEST(MixerParameterTween, InterpolatesAndStopsAtTarget) {
 
 TEST(MixerParameterTween, SupportsVector2AndExplicitStop) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
@@ -195,11 +195,11 @@ TEST(MixerParameterTween, SupportsVector2AndExplicitStop) {
 
 TEST(ExitEvent, FiresWhenEffectiveWeightBecomesZero) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
     int calls = 0;
 
     ExitEvent* exit = ExitEvent::registerEvent(*state, [&] { ++calls; });
@@ -217,11 +217,11 @@ TEST(ExitEvent, FiresWhenEffectiveWeightBecomesZero) {
 
 TEST(ExitEvent, UnregisterPreventsCallback) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
     int calls = 0;
 
     ExitEvent* exit = ExitEvent::registerEvent(*state, [&] { ++calls; });
@@ -236,11 +236,11 @@ TEST(ExitEvent, UnregisterPreventsCallback) {
 
 TEST(ExitEvent, DestroyedNodeCancelsPendingEvent) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);
-    AnimancerState* state = root.play(clip);
+    HobiState* state = root.play(clip);
     int calls = 0;
 
     ExitEvent::registerEvent(*state, [&] { ++calls; });
@@ -251,13 +251,13 @@ TEST(ExitEvent, DestroyedNodeCancelsPendingEvent) {
 
 TEST(ExitEvent, UnregisterFromPlayableRemovesOneAtATime) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
-    AnimancerState* stateA = root.play(clipA);
-    AnimancerState* stateB = root.play(clipB);
+    HobiState* stateA = root.play(clipA);
+    HobiState* stateB = root.play(clipB);
     int calls = 0;
 
     ExitEvent::registerEvent(*stateA, [&] { ++calls; });
@@ -275,17 +275,17 @@ TEST(ExitEvent, UnregisterFromPlayableRemovesOneAtATime) {
 
 TEST(DontAllowFade, CancelsLayerAndCurrentStateFades) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
     root.play(clipA);
-    AnimancerState* stateB =
+    HobiState* stateB =
         root.layers().getLayer(0)->play(clipB, 1.0f, FadeMode::FixedDuration);
     ASSERT_GT(stateB->fadeSpeed(), 0.0f);
 
-    AnimancerLayer* layer = root.layers().getLayer(0);
+    HobiLayer* layer = root.layers().getLayer(0);
     layer->startFade(0.25f, 1.0f);
 
     DontAllowFade::enable(root);

@@ -241,19 +241,19 @@ struct AvatarMask { std::vector<float> boneWeights;
 ```
 ```
 
-## animancer
+## hobi
 
 > **权威性约定**：本节以“实际签名（当前头文件）”为准。
 > 早期设计稿已移除；以下只列实际签名与头文件索引，不应引用历史版本。
-> 完整实现说明见 `docs/07-Animancer门面.md §13`。
+> 完整实现说明见 `docs/07-Hobi门面.md §13`。
 
 ### 实际签名（当前头文件）
 
 ```cpp
-// animancer/Transition.h（节选）
+// hobi/Transition.h（节选）
 class ITransition : public IAnimationClipCollection { public: virtual ~ITransition()=default;
-  virtual AnimancerState* createState(AnimancerPlayable& root)=0;
-  virtual void apply(AnimancerState&)=0;
+  virtual HobiState* createState(HobiPlayable& root)=0;
+  virtual void apply(HobiState&)=0;
   virtual float fadeDuration() const=0; virtual FadeMode fadeMode() const=0;
   virtual Key key() const; virtual EventSequence* events(); virtual bool isValid() const;
   void gatherAnimationClips(std::vector<const Clip*>&) const override {} };
@@ -262,7 +262,7 @@ class ClipTransition : public ITransition { public:
   const Clip* clip=nullptr; float fadeDurationValue=0.25f; float speedValue=1.0f;
   float normalizedStartTime=std::numeric_limits<float>::quiet_NaN();
   EventSequence eventSequence;
-  AnimancerState* createState(AnimancerPlayable&) override; void apply(AnimancerState&) override;
+  HobiState* createState(HobiPlayable&) override; void apply(HobiState&) override;
   float fadeDuration() const override; FadeMode fadeMode() const override;
   EventSequence* events() override; bool isValid() const override; Key key() const override;
   virtual float length() const; virtual float maximumDuration() const;
@@ -271,14 +271,14 @@ class ClipTransition : public ITransition { public:
   void gatherAnimationClips(std::vector<const Clip*>&) const override;
   virtual void copyFrom(const ClipTransition&); };
 
-// animancer/ClipTransitionSequence.h（已实现）
+// hobi/ClipTransitionSequence.h（已实现）
 class ClipTransitionSequence : public ClipTransition { public:
   std::vector<ClipTransition> others;
   ClipTransition& lastTransition() noexcept;
   const ClipTransition& lastTransition() const noexcept;
-  AnimancerEvent& endEvent() noexcept;
-  const AnimancerEvent& endEvent() const noexcept;
-  void apply(AnimancerState&) override;
+  HobiEvent& endEvent() noexcept;
+  const HobiEvent& endEvent() const noexcept;
+  void apply(HobiState&) override;
   bool isValid() const override;
   bool isLooping() const noexcept override;
   float length() const override;
@@ -291,33 +291,33 @@ class ClipTransitionSequence : public ClipTransition { public:
 ```
 
 > 实际签名要点：
-> - `AnimancerPlayable` 使用 `layers()` / `states()` 方法与 `totalWeight()`；
+> - `HobiPlayable` 使用 `layers()` / `states()` 方法与 `totalWeight()`；
 >   `createOutput(Skeleton&)` 只绑定骨架，不再返回输出对象。
-> - `AnimancerState` 没有 `rawTime`：State 时间是唯一权威，`ClipNode` 关闭了
+> - `HobiState` 没有 `rawTime`：State 时间是唯一权威，`ClipNode` 关闭了
 >   自动推进（`setAutoAdvanceTime(false)`）。
-> - `ClipState` 构造为 `ClipState(AnimancerPlayable*, const Clip&)`。
-> - `ITransition::createState(AnimancerPlayable&)`。
-> - `CustomFade` 与混合器 Transition 已实现（见 `include/anim/animancer/MixerStates.h` / `MixerTransitions.h`）。
+> - `ClipState` 构造为 `ClipState(HobiPlayable*, const Clip&)`。
+> - `ITransition::createState(HobiPlayable&)`。
+> - `CustomFade` 与混合器 Transition 已实现（见 `include/anim/hobi/MixerStates.h` / `MixerTransitions.h`）。
 > - `ClipTransitionSequence` 已实现，支持串联、序列级 length/events、`copyFrom`。
 
 ### 其他已实现 API
 
-以下类型不再复制声明，完整签名与行为以 `include/anim/animancer/*.h` 及 [07 §13](07-Animancer门面.md) 为准：
-- `AnimancerPlayable` / `AnimancerNode` / `AnimancerState` / `AnimancerLayer` / `LayerList` / `StateDictionary` / `ClipState`
+以下类型不再复制声明，完整签名与行为以 `include/anim/hobi/*.h` 及 [07 §13](07-Hobi门面.md) 为准：
+- `HobiPlayable` / `HobiNode` / `HobiState` / `HobiLayer` / `LayerList` / `StateDictionary` / `ClipState`
 - `ManualMixerState` / `LinearMixerState` / `DirectionalMixerState` / `CartesianMixerState`
 - `ManualMixerTransition` / `LinearMixerTransition` / `MixerTransition2D`
-- `EventSequence` / `EventDispatcher` / `CustomFade` / `Easing` / `AnimancerAnimator` / `SoloAnimation` / `NamedAnimancerAnimator`
+- `EventSequence` / `EventDispatcher` / `CustomFade` / `Easing` / `HobiAnimator` / `SoloAnimation` / `NamedHobiAnimator`
 - `AnimationClipCollection.h`：`IAnimationClipCollection::gatherAnimationClips` + `gatherClip` 去重工具
 - `StateDictionary::current()`、`createIfNew(...)`、`gatherAnimationClips(...)`
-- `AnimancerLayer::getState(Key&)` 沿跨层 key 链查找；`createIfNew(...)`、`gatherAnimationClips(...)`；`LayerList` / `AnimancerPlayable` / `AnimancerAnimator` / `SoloAnimation` 同样可收集
-- `AnimancerState` / `ManualMixerState` / `ClipTransition` / `ClipTransitionSequence` / `ManualMixerTransition` 支持递归收集
+- `HobiLayer::getState(Key&)` 沿跨层 key 链查找；`createIfNew(...)`、`gatherAnimationClips(...)`；`LayerList` / `HobiPlayable` / `HobiAnimator` / `SoloAnimation` 同样可收集
+- `HobiState` / `ManualMixerState` / `ClipTransition` / `ClipTransitionSequence` / `ManualMixerTransition` 支持递归收集
 - `TimeSynchronizer<T>` / `TimeSynchronizationGroup`：按 group/key 同步 NormalizedTime
 - `DirectionalAnimationSet` / `DirectionalAnimationSet8` / `DirectionalClipTransition`：4/8 方向选择和 snap
 - `MixerParameterTween<T>` / `MixerParameterTweenFloat` / `MixerParameterTweenVector2`：混合器参数平滑
 - `ExitEvent`：EffectiveWeight 归零时的 post-update 回调
 - `DontAllowFade`：检测并取消不应发生的 Fade（debug 断言启用）
 - `StateMachine<TState>::StateSelector` / `IPrioritizable`：按优先级尝试进入状态
-- `AnimancerPlayable` 新增 `requireOwnedPreUpdate`、更新列表查询（`isPreUpdating/isPostUpdating` 等）
+- `HobiPlayable` 新增 `requireOwnedPreUpdate`、更新列表查询（`isPreUpdating/isPostUpdating` 等）
 
 ## avatar（`namespace anim`，`include/anim/avatar/`）
 
@@ -463,7 +463,7 @@ class AnimatedFloat { const Curve* curve; const PropertyChannel* property;
 class AnimatedBool  { /* 同上 */ float threshold=0.5f; bool sample(float) const; };
 class AnimatedInt   { /* 同上 */ int sample(float) const; };
 
-// AnimancerPlayable（P5 新增）
+// HobiPlayable（P5 新增）
 PlayableHandle insertOutputJob(IAnimationJob* job, IJobScheduler* scheduler=nullptr);
 void removePlayable(PlayableHandle handle);
 void setRootMotionTarget(IRootMotionTarget*);
@@ -472,7 +472,7 @@ int rootMotionRootBone() const;
 const RootMotionDelta& rootMotionDelta() const;
 ```
 
-## rootmotion（`include/anim/animancer/rootmotion/`）
+## rootmotion（`include/anim/hobi/rootmotion/`）
 
 ```cpp
 class IRootMotionTarget { virtual void applyRootMotion(const RootMotionDelta&)=0;
@@ -562,24 +562,24 @@ class AnimationTransitions {
   bool build(const AnimationClipLibrary&, const EventCallbackMap&, std::string& error);
   ClipTransition* find(std::string_view name) noexcept;
   const ClipAssetInfo* info(std::string_view name) const noexcept;
-  AnimancerState* play(AnimancerAnimator&, std::string_view name,
+  HobiState* play(HobiAnimator&, std::string_view name,
                        std::string* error = nullptr);
-  bool bindRootBone(AnimancerAnimator&, std::string_view name,
+  bool bindRootBone(HobiAnimator&, std::string_view name,
                     std::string* error = nullptr) const;
 };
 ```
 
 `AnimationClipLibrary` 共享 decode 后的 `Clip`，并以 manifest 的 `loop` 覆盖 `.ab`；
 `AnimationTransitions` 是每角色副本，持有自己的 `EventSequence`，`play` 会根据
-`rootBone` 设置根运动骨骼。两者都必须比使用它们的 State/Animancer 活得久。
+`rootBone` 设置根运动骨骼。两者都必须比使用它们的 State/HobiAnimator 活得久。
 
 P8.2 的 `anim_pack` 不进入公共运行时库：其公开入口位于
 `tools/anim_pack/AnimPack.h`，由 `ANIM_BUILD_ANIM_PACK` 控制构建，核心库仍不依赖 cgltf。
 
-## animancer / retarget（P9，可选）
+## hobi / retarget（P9，可选）
 
 ```cpp
-// animancer/Transition.h
+// hobi/Transition.h
 class RetargetClipTransition : public ITransition {
  public:
   const Clip* clip = nullptr;                // 源 BoneLocalClip
@@ -592,22 +592,22 @@ class RetargetClipTransition : public ITransition {
   EventSequence eventSequence;
 };
 
-// animancer/RetargetClipState.h
-class RetargetClipState : public AnimancerState {
+// hobi/RetargetClipState.h
+class RetargetClipState : public HobiState {
  public:
-  RetargetClipState(AnimancerPlayable*, const Clip&, const Skeleton&,
+  RetargetClipState(HobiPlayable*, const Clip&, const Skeleton&,
                     const HumanoidAvatar& source, const HumanoidAvatar& target);
 };
 ```
 
-`RetargetClipTransition` 通过目标 `AnimancerPlayable::skeleton()` 取得目标骨架；源 Clip
+`RetargetClipTransition` 通过目标 `HobiPlayable::skeleton()` 取得目标骨架；源 Clip
 必须是 `ClipType::BoneLocal`，内部使用现有 `retargetHumanoidLocalPose`。源
 `Skeleton`/两个 `HumanoidAvatar` 以及 Transition（含事件序列）必须在 State 生命周期内有效。
 
-## integration / threading（P7）+ AnimancerAnimator 门面（P8.5/P8.5b）
+## integration / threading（P7）+ HobiAnimator 门面（P8.5/P8.5b）
 
 ```cpp
-// animancer/AnimancerAnimator.h
+// hobi/HobiAnimator.h
 void initialize(Skeleton&, const HumanoidAvatar* = nullptr, int layers = 1);
 bool isInitialized() const;
 void update(float dt);                       // 图求值 + computePalette
@@ -621,26 +621,26 @@ void unpauseGraph();
 const std::vector<Mat4>& palette() const;
 RootMotionDelta consumeRootMotion() const;
 
-AnimancerState* play(const Clip&);
-AnimancerState* play(const Clip&, float fadeDuration,
+HobiState* play(const Clip&);
+HobiState* play(const Clip&, float fadeDuration,
                      FadeMode mode = FadeMode::FixedSpeed);
-AnimancerState* play(ITransition&);
-AnimancerState* play(ITransition&, float fadeDuration,
+HobiState* play(ITransition&);
+HobiState* play(ITransition&, float fadeDuration,
                      FadeMode mode = FadeMode::FixedSpeed);
-AnimancerState* play(AnimancerState*);
-AnimancerState* play(AnimancerState*, float fadeDuration,
+HobiState* play(HobiState*);
+HobiState* play(HobiState*, float fadeDuration,
                      FadeMode mode = FadeMode::FixedSpeed);
-AnimancerState* tryPlay(Key);
-AnimancerState* tryPlay(Key, float fadeDuration,
+HobiState* tryPlay(Key);
+HobiState* tryPlay(Key, float fadeDuration,
                         FadeMode mode = FadeMode::FixedSpeed);
 void stop();
-AnimancerState* stop(const Clip&);
-AnimancerState* stop(Key);
+HobiState* stop(const Clip&);
+HobiState* stop(Key);
 bool isPlaying() const;
 bool isPlaying(const Clip&) const;
 bool isPlaying(Key) const;
 bool isPlayingClip(const Clip&) const;
-AnimancerLayer* layer(int index);
+HobiLayer* layer(int index);
 
 // integration/Skinning.h
 struct SkinningPalette { std::span<const Mat4> bones; };
@@ -662,18 +662,18 @@ void parallelFor(size_t count, std::function<void(size_t, size_t)> body);
 int workerCount() const;
 ```
 
-`AnimancerAnimator` 的未初始化保护：`play(...)`/`layer(...)` 返回 `nullptr`，
+`HobiAnimator` 的未初始化保护：`play(...)`/`layer(...)` 返回 `nullptr`，
 `stop()` 无操作，`isPlaying(...)` 返回 `false`。
 
 `play(clip)`/`play(state)`/`tryPlay(key)` 会按已注册状态的原有 Layer 播放（对应
-`AnimancerPlayable.GetLocalLayer`），不会强制搬到 Layer 0；若显式让某 Layer
-`play(state)` 且 state 属于另一 Layer，则按原 `AnimancerLayer.GetOrCreateState(AnimancerState)`
+`HobiPlayable.GetLocalLayer`），不会强制搬到 Layer 0；若显式让某 Layer
+`play(state)` 且 state 属于另一 Layer，则按原 `HobiLayer.GetOrCreateState(HobiState)`
 克隆状态。`isPlayingClip` 搜索所有状态，`isPlaying()`/`isPlaying(clip)` 在图暂停时返回 `false`。
 
 ### SoloAnimation（单 Clip 门面）
 
 ```cpp
-// animancer/SoloAnimation.h
+// hobi/SoloAnimation.h
 void initialize(Skeleton&, const HumanoidAvatar* = nullptr);
 bool play(const Clip&);                    // 不创建 Layer/State，失败返回 false
 void stop();                               // 暂停并回到时间 0
@@ -691,10 +691,10 @@ Humanoid Clip 必须提供 `HumanoidAvatar`，`Skeleton`/`HumanoidAvatar` 与 Cl
 播放中再次 `play(clip)` 会从 0 重新开始；
 非循环 Clip 到末尾自动暂停，循环 Clip 的 `time` 保持累计值、采样时间取 `fmod`。
 
-### NamedAnimancerAnimator（名字→Clip）
+### NamedHobiAnimator（名字→Clip）
 
 ```cpp
-// animancer/NamedAnimancerAnimator.h
+// hobi/NamedHobiAnimator.h
 struct NamedAnimation { std::string name; const Clip* clip; };
 void initialize(Skeleton&, const HumanoidAvatar* = nullptr, int layers = 1);
 void setAnimations(std::initializer_list<NamedAnimation>);
@@ -703,15 +703,15 @@ bool removeAnimation(std::string_view name);
 const Clip* findAnimation(std::string_view name) const;
 const Clip* defaultAnimation() const;
 bool setDefaultAnimation(std::string_view name);
-AnimancerState* playDefault();
-AnimancerState* start();                   // playAutomatically ? playDefault() : nullptr
-AnimancerState* play(std::string_view name);
-AnimancerState* play(std::string_view name, float fadeDuration, FadeMode);
-AnimancerState* stop(std::string_view name);
+HobiState* playDefault();
+HobiState* start();                   // playAutomatically ? playDefault() : nullptr
+HobiState* play(std::string_view name);
+HobiState* play(std::string_view name, float fadeDuration, FadeMode);
+HobiState* stop(std::string_view name);
 bool isPlaying(std::string_view name) const;
 ```
 
-对应原 `NamedAnimancerComponent`：调用方显式注册名字；默认动画是第一个有效项，
+对应原 `NamedHobiComponent`：调用方显式注册名字；默认动画是第一个有效项，
 `start()` 对应原 `OnEnable` 的自动播放策略；`playDefault()` 总是显式播放默认项。`Clip` 只有 `StringId name`，因此 C++ 侧
 不能像 Unity 一样自动从 `clip.name` 取得字符串名字。
 
@@ -730,7 +730,7 @@ uploadBones(a->palette());
 > #include "anim/integration/ecs/entt/Components.h"
 > #include "anim/integration/ecs/entt/Systems.h"
 >
-> registry.emplace<ecs::AnimancerComponent>(entity, ecs::AnimancerComponent{&animator});
+> registry.emplace<ecs::HobiComponent>(entity, ecs::HobiComponent{&animator});
 > registry.emplace<ecs::JobListComponent>(entity, ecs::JobListComponent{{&ikJob}});
 > registry.emplace<ecs::PoseComponent>(entity);
 > registry.emplace<ecs::SkinningComponent>(entity);

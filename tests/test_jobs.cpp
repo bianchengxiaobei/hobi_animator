@@ -4,8 +4,8 @@
 #include <cmath>
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/jobs/AnimatedValue.h"
 #include "anim/jobs/Damping.h"
 #include "anim/jobs/JobScheduler.h"
@@ -234,7 +234,7 @@ TEST(Jobs, InsertAndRemoveOutputJob) {
     Skeleton skeleton;
     skeleton.addBone(1, -1, Transform{});
 
-    AnimancerPlayable playable;
+    HobiPlayable playable;
     playable.createOutput(skeleton);
 
     RotateJob job;
@@ -257,9 +257,9 @@ TEST(Jobs, ParallelSchedulerMatchesInline) {
     Skeleton skeleton;
     skeleton.addBone(1, -1, Transform{});
 
-    AnimancerPlayable inlinePlayable;
+    HobiPlayable inlinePlayable;
     inlinePlayable.createOutput(skeleton);
-    AnimancerPlayable parallelPlayable;
+    HobiPlayable parallelPlayable;
     parallelPlayable.createOutput(skeleton);
 
     RotateJob inlineJob;
@@ -287,7 +287,7 @@ TEST(Jobs, RemoveMiddleJobReconnectsChain) {
     Skeleton skeleton;
     skeleton.addBone(1, -1, Transform{});
 
-    AnimancerPlayable playable;
+    HobiPlayable playable;
     playable.createOutput(skeleton);
 
     RotateJob first;

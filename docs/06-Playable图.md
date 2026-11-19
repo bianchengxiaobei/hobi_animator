@@ -1,6 +1,6 @@
 # 06 · Playable 图
 
-L5 层：自实现一个与 Unity Playables **语义等价**的求值图。原项目大量依赖 `PlayableGraph/Playable/PlayableBehaviour`（见 `AnimancerPlayable.cs`、`AnimancerNode.cs`、`AnimancerLayer.cs` 的 `_Graph.Connect/Disconnect/SetInputWeight/SetInputCount`）。本库要用 C++ 提供同名语义，使上层 Animancer 门面可以“照抄原逻辑”。
+L5 层：自实现一个与 Unity Playables **语义等价**的求值图。原项目大量依赖 `PlayableGraph/Playable/PlayableBehaviour`（见 `AnimancerPlayable.cs`、`AnimancerNode.cs`、`AnimancerLayer.cs` 的 `_Graph.Connect/Disconnect/SetInputWeight/SetInputCount`）。本库要用 C++ 提供同名语义，使上层 Hobi 门面可以“照抄原逻辑”。
 
 ## 1. 设计目标
 
@@ -103,7 +103,7 @@ public:
 ### 4.1 求值顺序（关键）
 
 `evaluate(dt)`：
-1. 从输出根节点出发，按**拓扑序**（父→子）调用 `prepareFrame(dt)`（保证早于任何子节点求值；对应原项目 `AnimancerPlayable.PrepareFrame` 与 `PostUpdate.PrepareFrame` 的语义）。
+1. 从输出根节点出发，按**拓扑序**（父→子）调用 `prepareFrame(dt)`（保证早于任何子节点求值；对应原项目 `HobiPlayable.PrepareFrame` 与 `PostUpdate.PrepareFrame` 的语义）。
 2. 再从根节点 `processFrame(dt)` 触发下拉求值：节点在 `processFrame` 内部对每个输入调用 `child->processFrame(dt)`（或由内部求值器统一调度），合成输出。
 3. 时间推进：节点在 `processFrame` 中按 `_playing` 与 `_speed` 推进 `_time`（或用外部统一时钟；见 §6）。
 
@@ -113,7 +113,7 @@ public:
 
 | 节点 | 对应 Unity | 职责 |
 |------|-----------|------|
-| `ScriptNode` | `ScriptPlayable<T>` / `PlayableBehaviour` | 承载用户行为（如 AnimancerPlayable/PostUpdate） |
+| `ScriptNode` | `ScriptPlayable<T>` / `PlayableBehaviour` | 承载用户行为（如 HobiPlayable/PostUpdate） |
 | `MixerNode` | `AnimationMixerPlayable` | N 路加权混合 `Pose` |
 | `LayerMixerNode` | `AnimationLayerMixerPlayable` | 层间混合 + additive + AvatarMask |
 | `ClipNode` | `AnimationClipPlayable` | 采样单个 Clip 产出 Pose |
@@ -150,8 +150,8 @@ public:
 ## 6. 时钟与 deltaTime
 
 - 原项目用 `FrameData.deltaTime * effectiveParentSpeed` 推进（`AnimancerPlayable.cs:1252`）。
-- 本库：`AnimancerPlayable` 在早期更新里计算 `DeltaTime`；节点的时间推进由 `prepareFrame` 阶段统一完成（或由 ClipNode/MixerNode 的 processFrame 推进，二选一，文档统一为**在 prepareFrame 阶段推进时间**，processFrame 只读）。
-- `FrameID`：每次 evaluate 自增，`AnimancerState::TimeD` 用它缓存（对应原 `AnimancerState.cs:430,480`）。
+- 本库：`HobiPlayable` 在早期更新里计算 `DeltaTime`；节点的时间推进由 `prepareFrame` 阶段统一完成（或由 ClipNode/MixerNode 的 processFrame 推进，二选一，文档统一为**在 prepareFrame 阶段推进时间**，processFrame 只读）。
+- `FrameID`：每次 evaluate 自增，`HobiState::TimeD` 用它缓存（对应原 `AnimancerState.cs:430,480`）。
 
 ## 7. 连接/权重语义（务必与上层约定一致）
 
@@ -166,7 +166,7 @@ public:
 
 ## 9. 调试
 
-- `dumpGraph()`：按树打印节点类型、输入权重、时间、播放态（对齐原 `AnimancerNode.AppendDescription`）。
+- `dumpGraph()`：按树打印节点类型、输入权重、时间、播放态（对齐原 `HobiNode.AppendDescription`）。
 - 可选：`GraphVisualizer` 输出 DOT，便于排查连接错误。
 
 ## 10. 文件清单
@@ -216,7 +216,7 @@ P2 参考了同机 **hdrp-bgfx** 的 RenderGraph 架构（C++20 + bgfx 渲染器
 4. **两阶段**：
    - `prepare` 按拓扑序（父→子）；
    - `process` 按逆拓扑序（子→父），节点只读取子节点已算好的 `outputPose()`；
-   - prepare 期间允许改图（Animancer 的动态连接依赖此行为），改完重新编译。
+   - prepare 期间允许改图（Hobi 的动态连接依赖此行为），改完重新编译。
 5. **节点**：`ClipNode / MixerNode / LayerMixerNode / ScriptNode / ScriptPoseNode`。
    - `ClipNode`：构造时取 `Clip.length/looping`，prepare 推进时间，process 采样。
    - `MixerNode`：复用 `blendPoses`，端口权重默认 0（Unity SetInputCount 语义），

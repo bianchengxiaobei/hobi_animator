@@ -2,9 +2,9 @@
 
 #include <cmath>
 
-#include "anim/animancer/rootmotion/RootMotion.h"
-#include "anim/animancer/rootmotion/Targets.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/rootmotion/RootMotion.h"
+#include "anim/hobi/rootmotion/Targets.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Pose.h"
 #include "anim/skeleton/RootMotion.h"
@@ -154,7 +154,7 @@ TEST(RootMotion, PlayableAppliesDeltaEachFrame) {
     Transform targetTransform;
     RootMotionToTransform target(&targetTransform);
 
-    AnimancerPlayable playable;
+    HobiPlayable playable;
     playable.createOutput(skeleton);
     playable.setRootMotionTarget(&target);
     playable.play(clip);

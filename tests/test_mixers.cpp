@@ -2,16 +2,16 @@
 
 #include <cmath>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerLayer.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/ClipState.h"
-#include "anim/animancer/CustomFade.h"
-#include "anim/animancer/Easing.h"
-#include "anim/animancer/LayerList.h"
-#include "anim/animancer/MixerStates.h"
-#include "anim/animancer/MixerTransitions.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiLayer.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/ClipState.h"
+#include "anim/hobi/CustomFade.h"
+#include "anim/hobi/Easing.h"
+#include "anim/hobi/LayerList.h"
+#include "anim/hobi/MixerStates.h"
+#include "anim/hobi/MixerTransitions.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -47,7 +47,7 @@ BoneLocalClip makeLinearClip(float length, float from, float to, bool looping = 
 
 TEST(Mixers, ManualMixerBlendsChildWeights) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -74,7 +74,7 @@ TEST(Mixers, ManualMixerBlendsChildWeights) {
 
 TEST(Mixers, LinearMixerInterpolatesWeights) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -99,7 +99,7 @@ TEST(Mixers, LinearMixerInterpolatesWeights) {
 
 TEST(Mixers, LinearMixerExtrapolatesSpeed) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -122,7 +122,7 @@ TEST(Mixers, LinearMixerExtrapolatesSpeed) {
 
 TEST(Mixers, DirectionalMixerWeightsSumToOne) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -147,7 +147,7 @@ TEST(Mixers, DirectionalMixerWeightsSumToOne) {
 
 TEST(Mixers, CartesianMixerWeightsSumToOne) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -172,7 +172,7 @@ TEST(Mixers, CartesianMixerWeightsSumToOne) {
 
 TEST(Mixers, LinearMixerTransitionInitializesState) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -185,7 +185,7 @@ TEST(Mixers, LinearMixerTransitionInitializesState) {
     transition.defaultParameter = 0.75f;
     transition.fadeDurationValue = 0.0f;
 
-    AnimancerState* state = animator.play(transition);
+    HobiState* state = animator.play(transition);
     auto* mixer = dynamic_cast<LinearMixerState*>(state);
     ASSERT_NE(mixer, nullptr);
     EXPECT_EQ(mixer->childCount(), 3);
@@ -199,7 +199,7 @@ TEST(Mixers, LinearMixerTransitionInitializesState) {
 
 TEST(Mixers, MixerTransition2DCreatesDirectionalMixer) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
@@ -212,7 +212,7 @@ TEST(Mixers, MixerTransition2DCreatesDirectionalMixer) {
     transition.defaultParameter = Vec2(1.0f, 0.0f);
     transition.fadeDurationValue = 0.0f;
 
-    AnimancerState* state = animator.play(transition);
+    HobiState* state = animator.play(transition);
     auto* mixer = dynamic_cast<DirectionalMixerState*>(state);
     ASSERT_NE(mixer, nullptr);
     EXPECT_EQ(mixer->childCount(), 2);
@@ -224,17 +224,17 @@ TEST(Mixers, MixerTransition2DCreatesDirectionalMixer) {
 
 TEST(Mixers, CustomFadeUsesCurve) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clipA = makeLinearClip(1.0f, 0.0f, 10.0f);
     const BoneLocalClip clipB = makeLinearClip(1.0f, 0.0f, 20.0f);
 
-    AnimancerState* stateA = animator.play(clipA);
+    HobiState* stateA = animator.play(clipA);
     ASSERT_NE(stateA, nullptr);
 
-    AnimancerLayer& layer = *animator.playable().layers()[0];
-    AnimancerState* stateB = layer.play(clipB, 1.0f, FadeMode::FixedDuration);
+    HobiLayer& layer = *animator.playable().layers()[0];
+    HobiState* stateB = layer.play(clipB, 1.0f, FadeMode::FixedDuration);
     ASSERT_NE(stateB, nullptr);
     ASSERT_NE(stateA, stateB);
 

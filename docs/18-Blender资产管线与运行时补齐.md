@@ -6,19 +6,19 @@
 
 ## 1. 结论先行
 
-`AnimancerCpp` 的运行时主链路已经可用：Clip、Layer、Fade、Transition、Event、Mixer、FSM、Root Motion、Jobs、Humanoid、bgfx 调色板都有实现和测试。当前真正缺的不是再移植一批 Animancer 类，而是：
+`hobi_animator` 的运行时主链路已经可用：Clip、Layer、Fade、Transition、Event、Mixer、FSM、Root Motion、Jobs、Humanoid、bgfx 调色板都有实现和测试。当前真正缺的不是再移植一批动画类，而是：
 
 1. **Blender 资产入口**：现在只有 Unity `.anim`（YAML）转 `.ab`，没有 Blender/glTF 路径；
 2. **动画配置资产**：`ClipTransition` 只有运行时结构，没有可从磁盘读取的 fade/speed/loop/events 配置；
-3. **事件接线**：`.ab` 的 `EventMarker` 不会自动变成 `AnimancerState` 的 `EventSequence`；
+3. **事件接线**：`.ab` 的 `EventMarker` 不会自动变成 `HobiState` 的 `EventSequence`；
 4. **生产级骨架加载**：sample 的 `FbxLoader` 不是通用加载器，`SkeletonLoader` 也没有 `inverseBind`；
-5. **`AnimancerAnimator` 门面**：P8.5 已补齐原版常用的 `Play(clip, fade, mode)`、`Stop`、`IsPlaying`、`Layer` 转发入口。
+5. **`HobiAnimator` 门面**：P8.5 已补齐原版常用的 `Play(clip, fade, mode)`、`Stop`、`IsPlaying`、`Layer` 转发入口。
 
 因此本文的核心策略是：
 
 ```text
 Blender -> glTF/GLB -> offline anim_pack -> .ab + skeleton.json + manifest.json
-C++ runtime -> load assets -> AnimancerAnimator -> update -> palette
+C++ runtime -> load assets -> HobiAnimator -> update -> palette
 ```
 
 **先打通资产链路，再补门面便利性；不为了“像原版”继续复制 Unity 组件体系。**
@@ -37,7 +37,7 @@ C++ runtime -> load assets -> AnimancerAnimator -> update -> palette
   - manifest 读取；
   - ClipTransition 构造；
   - 事件名到回调的绑定；
-  - `AnimancerAnimator` 的常用便利方法。
+  - `HobiAnimator` 的常用便利方法。
 - 保持现有 Unity `.anim -> .ab` 路径不回归，原有 195/195 测试保持通过。
 - 所有新增工具和测试在 Windows + MSVC + C++20 下可构建、可验证。
 
@@ -47,7 +47,7 @@ C++ runtime -> load assets -> AnimancerAnimator -> update -> palette
 
 - Unity Editor、Inspector、菜单、Editor 工具窗口；
 - `RuntimeAnimatorController`、Timeline、`PlayableAssetState`；
-- `HybridAnimancerComponent`、`NamedAnimancerComponent` 的完整复制；
+- 原项目 MonoBehaviour 组件包装的完整复制；
 - 跨骨架自动 Humanoid retarget（见 §9 的可选阶段）；
 - 运行时解析 glTF/GLB；
 - 动画压缩、量化、热重载、AssetBundle；
@@ -83,7 +83,7 @@ Blender
   ├─ 加载 Skeleton
   ├─ 加载 manifest + decodeClip
   ├─ 构造 ClipTransition / EventSequence
-  ├─ AnimancerAnimator::initialize
+  ├─ HobiAnimator::initialize
   └─ update(dt) -> palette
 ```
 
@@ -163,7 +163,7 @@ glTF 是右手系、Y-up；当前核心库不对世界手性做假设。约定�
 
 - 纯静态事件可共享；
 - 角色相关事件使用每角色 `ClipTransition` 或 `UnShared<ClipTransition>` 拷贝；
-- `ClipTransition`、`EventSequence`、`Clip`、`Skeleton`、`Avatar` 的生命周期必须覆盖 State/Animancer。
+- `ClipTransition`、`EventSequence`、`Clip`、`Skeleton`、`Avatar` 的生命周期必须覆盖 State/HobiAnimator。
 
 ### ADR-08：核心库不引入 glTF/第三方 JSON 依赖
 
@@ -456,9 +456,9 @@ callbacks["Footstep.Right"] = [] { /* ... */ };
 anim::AnimationTransitions transitions;      // 每角色一份
 transitions.build(clips, callbacks, error);
 
-anim::AnimancerAnimator animator;
+anim::HobiAnimator animator;
 animator.initialize(skeleton);
-anim::AnimancerState* state = transitions.play(animator, "Walk", &error);
+anim::HobiState* state = transitions.play(animator, "Walk", &error);
 ```
 
 `AnimationClipLibrary` 持有 decode 后的 `Clip`，并用 manifest 的 `loop` 覆盖 `.ab`
@@ -474,25 +474,25 @@ anim::AnimancerState* state = transitions.play(animator, "Walk", &error);
 - looping Clip 的事件必须在 `[0, 1)`；`AnimationTransitions::build` 会拒绝 `>= 1` 的事件；
 - `UnShared<ClipTransition>` 仍可用于手工配置的 Transition；manifest 路径直接使用
   `AnimationTransitions`，它已经持有每角色副本；
-- `AnimationClipLibrary` 必须晚于所有 `AnimancerAnimator` 析构，`AnimationTransitions`
-  必须晚于使用其事件的 State/Animancer 析构；
+- `AnimationClipLibrary` 必须晚于所有 `HobiAnimator` 析构，`AnimationTransitions`
+  必须晚于使用其事件的 State/HobiAnimator 析构；
 - `.ab` 的 markers 不自动触发；manifest 事件是唯一入口（除非后续补 marker 自动接线）。
 
-### 7.4 `AnimancerAnimator` 门面
+### 7.4 `HobiAnimator` 门面
 
 在不破坏现有 API 的前提下补：
 
 ```cpp
-AnimancerState* play(const Clip& clip, float fadeDuration, FadeMode mode);
-AnimancerState* play(ITransition& transition, float fadeDuration, FadeMode mode);
+HobiState* play(const Clip& clip, float fadeDuration, FadeMode mode);
+HobiState* play(ITransition& transition, float fadeDuration, FadeMode mode);
 void stop();
 bool isPlaying() const;
 bool isPlaying(const Clip& clip) const;
-AnimancerLayer* layer(int index);
+HobiLayer* layer(int index);
 ```
 
 实现只是转发到 `playable()` / `layers()`；不复制核心逻辑。P8.5 已在
-`AnimancerAnimator.h` / `.cpp` 中完成，clip 与 transition 的 fade 重载都直接调用 layer 0。
+`HobiAnimator.h` / `.cpp` 中完成，clip 与 transition 的 fade 重载都直接调用 layer 0。
 
 ### 7.5 资源生命周期
 
@@ -502,14 +502,14 @@ AnimancerLayer* layer(int index);
 Skeleton* / HumanoidAvatar*  （共享，外部生命周期）
 AnimationClipLibrary          （共享：每个角色复用 decode 后的 Clip）
 AnimationTransitions          （每角色一份；持有自己的 EventSequence）
-AnimancerAnimator
+HobiAnimator
 ```
 
 必须保证：
 
-- `Skeleton`/`Avatar` 在 `AnimancerAnimator` 之前析构；
-- `AnimationClipLibrary` 在使用其 Clip 的 State/Animancer 之后析构；
-- `AnimationTransitions` 在引用其 EventSequence 的 State/Animancer 之后析构；
+- `Skeleton`/`Avatar` 在 `HobiAnimator` 之前析构；
+- `AnimationClipLibrary` 在使用其 Clip 的 State/HobiAnimator 之后析构；
+- `AnimationTransitions` 在引用其 EventSequence 的 State/HobiAnimator 之后析构；
 - 播放期间不要重新 `load`/`build`，否则旧指针会失效；
 - `Clip`/`EventSequence` 在 State 生命周期内有效；不要用局部 `ClipTransition`。
 
@@ -683,11 +683,11 @@ build/tools/anim_pack/Release/anim_pack_demo.exe `
   --seconds 2 --samples 8
 ```
 
-`anim_pack_demo` 使用与运行时相同的 `AnimancerAnimator` / `ClipTransition`，会打印
+`anim_pack_demo` 使用与运行时相同的 `HobiAnimator` / `ClipTransition`，会打印
 每个采样点的 root local translation 和通过 `RootMotionToTransform` 消费后的角色位移。
 manifest 模式还会通过 `AnimationTransitions` 绑定事件并打印触发的事件名，同时按 manifest
 的 `rootBone` 设置根运动骨骼；直接 Clip 模式仍使用索引 0 作为演示根骨。
-真实游戏应使用 `PlayableGraph`/`AnimancerPlayable` 的常规循环，不需要 demo 代码。
+真实游戏应使用 `PlayableGraph`/`HobiPlayable` 的常规循环，不需要 demo 代码。
 
 ### 8.5 示例资产与验收边界
 
@@ -719,7 +719,7 @@ build/samples/bgfx_demo/Release/bgfx_demo.exe `
 若模型只能用 glTF 加载，需由引擎侧把 `character.glb` 的蒙皮/骨架接到相同
 `skeleton.json` 顺序；这是引擎适配，不是 P8 packer 的运行时职责。
 
-P8.3 已在合成 GLB 上跑通 `anim_pack + AnimancerAnimator` 播放；真实 Blender 资产的
+P8.3 已在合成 GLB 上跑通 `anim_pack + HobiAnimator` 播放；真实 Blender 资产的
 视觉验收仍需美术提供文件后执行，不能由合成夹具替代。
 
 ## 9. 分阶段实施
@@ -790,7 +790,7 @@ FPS 覆盖和不依赖 Blender 的 `--self-test`；`anim_pack --events` 读取
 `frameStart/frameEnd/events`，按 Action 覆盖 manifest 事件，未知 Action 直接报错；
 新增 `samples/anim_pack_demo`（构建目标 `anim_pack_demo`）和
 `AnimPack.RuntimePlaysPackedClip`，已在 `simple_rig.glb` 上跑通
-`anim_pack -> AnimancerAnimator -> palette`。真实 Blender 二进制未提交，按 §8.5 由外部
+`anim_pack -> HobiAnimator -> palette`。真实 Blender 二进制未提交，按 §8.5 由外部
 资产验收；P8.3 完成时 `ANIM_BUILD_ANIM_PACK=ON` 测试为 213/213。
 
 ### P8.4 运行时 manifest + 事件
@@ -810,7 +810,7 @@ FPS 覆盖和不依赖 Blender 的 `--self-test`；`anim_pack --events` 读取
   `.ab` 内的循环标记；
 - `AnimationTransitions`：每角色持有独立的 `ClipTransition`/`EventSequence`，按事件名
   绑定 `EventCallbackMap`，`play()` 自动解析并绑定 `rootBone`；
-- `AnimancerPlayable::rootMotionRootBone()` 提供绑定结果查询；
+- `HobiPlayable::rootMotionRootBone()` 提供绑定结果查询；
 - `anim_pack_demo --manifest ... [--clip-name Walk]` 复用同一套运行时路径，事件触发时打印。
 
 DoD：
@@ -820,7 +820,7 @@ DoD：
 - [x] 两个角色使用同一 manifest 时事件上下文互不串；
 - [x] 根运动由调用方消费，不自动改 Transform。
 
-### P8.5 `AnimancerAnimator` 门面
+### P8.5 `HobiAnimator` 门面
 
 任务：
 
@@ -831,12 +831,12 @@ DoD：
 实现（对齐原 `Assets/Plugins/Animancer/AnimancerComponent.cs:470-644` 的
 Play/Stop/IsPlaying 门面，但不复制组件体系）：
 
-- `AnimancerAnimator::play(clip, fade, mode)` / `play(transition, fade, mode)` 直接转发到
+- `HobiAnimator::play(clip, fade, mode)` / `play(transition, fade, mode)` 直接转发到
   `layers().getLayer(0)`，不复制 fade 逻辑；
-- `stop()` 转发到 `AnimancerPlayable::stop()`，遍历所有层；
+- `stop()` 转发到 `HobiPlayable::stop()`，遍历所有层；
 - `isPlaying()` / `isPlaying(clip)` 转发到 Playable；未初始化时安全返回 `false`；
 - `layer(index)` 返回 `layers().getLayer(index)`，越界或未初始化返回 `nullptr`；
-- 新增 4 个 `Animancer` 测试：clip fade、transition fade、跨层 stop、未初始化安全。
+- 新增 4 个 `Hobi` 测试：clip fade、transition fade、跨层 stop、未初始化安全。
 
 DoD：
 
@@ -878,13 +878,13 @@ DoD：
 
 - `RetargetClipNode`：采样源 `BoneLocalClip`，经 P4 已按 Unity `RetargetFrom` 语义
   实现的 `retargetHumanoidLocalPose` 输出目标骨架 Pose；
-- `RetargetClipState` / `RetargetClipTransition`：接入 `AnimancerLayer`/Playable 图，
+- `RetargetClipState` / `RetargetClipTransition`：接入 `HobiLayer`/Playable 图，
   支持 fade/speed/start/events 和状态生命周期；
 - 源 `Skeleton`/`HumanoidAvatar`、目标 `HumanoidAvatar` 和 Transition（含事件序列）
-  由调用方保证生命周期；目标骨架来自 `AnimancerPlayable::skeleton()`；
+  由调用方保证生命周期；目标骨架来自 `HobiPlayable::skeleton()`；
 - 仅支持源 `ClipType::BoneLocal`；源 Humanoid 肌肉 Clip 仍走现有
   `HumanoidClip + target avatar` 路径；
-- 新增 `Animancer.RetargetClipPlaysOnDifferentSkeleton` 测试，验证源 1m Hips
+- 新增 `Hobi.RetargetClipPlaysOnDifferentSkeleton` 测试，验证源 1m Hips
   到目标 2m Hips 的根平移缩放。
 
 仍需外部资产的部分：
@@ -906,7 +906,7 @@ DoD：
 - 事件 sidecar：frame range、越界、未知 Action、manifest 覆盖；
 - 坐标：`--coordinate mirrored` 双次镜像恢复原值；
 - 根运动：root bone 通道；
-- 运行时播放：打包后的 skeleton + `.ab` 经 `AnimancerAnimator` 播放并采样；
+- 运行时播放：打包后的 skeleton + `.ab` 经 `HobiAnimator` 播放并采样；
 - 门面：fade/stop/isPlaying。
 
 ### 10.2 集成验收
@@ -1025,8 +1025,8 @@ README.md                      // 文档索引与构建命令
 docs/11-资源转换器.md          // 增加 Blender/glTF 章节
 docs/12-引擎集成-bgfx.md       // 增加 manifest/Blender 接线
 docs/15-API参考.md             // AnimationAssets/Manifest 签名
-include/anim/animancer/AnimancerAnimator.h
-src/animancer/AnimancerAnimator.cpp
+include/anim/hobi/HobiAnimator.h
+src/hobi/HobiAnimator.cpp
 tools/anim_converter/SkeletonLoader.*  // inverseBind / 拓扑校验
 tools/anim_converter/AvatarLoader.*    // JSON 头文件迁移
 ```
@@ -1047,7 +1047,7 @@ P8 完成必须同时满足：
 - [ ] 同骨架 Walk/Run/Idle 至少三个 Clip 播放正常；
 - [ ] loop/fade/speed/start/rootBone/事件由 manifest 驱动；
 - [ ] 事件在循环中正确触发且不串角色；
-- [x] `AnimancerAnimator` 常用门面可用；
+- [x] `HobiAnimator` 常用门面可用；
 - [x] 原有 195/195 测试保持通过；P8.3 完成后主构建 202/202、pack 213/213、EnTT 203/203；P8.4 完成后主构建 209/209、pack 220/220、EnTT 210/210；P8.5 完成后主构建 213/213、pack 224/224、EnTT 214/214；P9 运行时核心完成后主构建 214/214、pack 225/225、EnTT 215/215；P8.5d 完成后主构建 235/235、pack 246/246、EnTT 236/236；
 - [x] 合成夹具的文档命令可复现；真实 Blender 资产命令模板见 §8.5/§10.2；
 - [ ] 没有把 cgltf/glTF 解析依赖引入运行时核心库；
@@ -1063,9 +1063,9 @@ P8 完成必须同时满足：
 | P8.2 `anim_pack` | 完成 | cgltf 1.14、GLB/glTF skeleton + animation 导入、LINEAR/STEP/CUBICSPLINE、四元数连续性、`--coordinate gltf|mirrored`、`.ab`/skeleton/manifest 输出 | `ANIM_BUILD_ANIM_PACK=ON` 209/209 |
 | P8.3 Blender 工作流 | 完成（真实资产待外部验收） | `tools/blender/export_events.py`、`--events` sidecar、完整 §8 文档、`anim_pack_demo`、运行时播放测试 | pack 测试 213/213；合成 GLB 播放通过；真实 Blender 资产未提交 |
 | P8.4 manifest + 事件 | 完成 | `AnimationClipLibrary`、`AnimationTransitions`、每角色事件副本、`rootBone` 绑定、`anim_pack_demo --manifest`、运行时循环/跨角色事件测试 | 主构建 209/209；pack 测试 220/220；EnTT 210/210；合成 GLB manifest 播放与事件打印通过 |
-| P8.5 门面 | 完成 | `AnimancerAnimator` fade/stop/isPlaying/layer 转发；4 个门面测试 | 主构建 213/213；pack 测试 224/224；EnTT 214/214 |
+| P8.5 门面 | 完成 | `HobiAnimator` fade/stop/isPlaying/layer 转发；4 个门面测试 | 主构建 213/213；pack 测试 224/224；EnTT 214/214 |
 | P8.5b 门面补全 | 完成 | `play(clip/state)`、`tryPlay(key)`、`stop(key/clip)`、`isPlaying(key/clip)`；按注册状态原 Layer 播放，`isPlayingClip` 搜索所有状态 | 主构建 225/225；pack 236/236；EnTT 226/226 |
-| P8.5c 组件等价补全 | 完成 | `AnimancerLayer` 跨层状态克隆；`NamedAnimancerAnimator`；`evaluate/speed/pauseGraph` | 主构建 232/232；pack 243/243；EnTT 233/233 |
+| P8.5c 组件等价补全 | 完成 | `HobiLayer` 跨层状态克隆；`NamedHobiAnimator`；`evaluate/speed/pauseGraph` | 主构建 232/232；pack 243/243；EnTT 233/233 |
 | P8.5d Layer key-chain 补全 | 完成 | `getState(key)` 沿跨层 key 链查找；`getOrCreateState(clip/transition)` 在目标 Layer 创建独立状态；`allowSetClip` | 主构建 235/235；pack 246/246；EnTT 236/236 |
 | P8.6 验收 | 文档/命令完成；真实视觉待外部 | README/docs 11/12/17 状态、合成夹具端到端命令、Blender 同骨架模板 | 主构建 213/213；pack 224/224；EnTT 214/214；真实 Blender `.glb` 截图未提交 |
 | P9 跨骨架运行时 | C++ 核心完成（可选） | `RetargetClipNode`/`RetargetClipState`/`RetargetClipTransition` | 主构建 214/214；pack 225/225；EnTT 215/215；真实不同拓扑视觉待外部 |

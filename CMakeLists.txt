@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(AnimancerCpp VERSION 0.1.0 LANGUAGES CXX)
+project(hobi_animator VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -98,29 +98,29 @@ add_library(anim STATIC
     src/integration/AnimationClipLibrary.cpp
     src/integration/AnimationTransitions.cpp
     src/integration/Skinning.cpp
-    src/animancer/EventSequence.cpp
-    src/animancer/EventDispatcher.cpp
-    src/animancer/AnimancerNode.cpp
-    src/animancer/AnimancerState.cpp
-    src/animancer/ClipState.cpp
-    src/animancer/RetargetClipState.cpp
-    src/animancer/AnimancerLayer.cpp
-    src/animancer/LayerList.cpp
-    src/animancer/StateDictionary.cpp
-    src/animancer/Transition.cpp
-    src/animancer/ClipTransitionSequence.cpp
-    src/animancer/AnimancerPlayable.cpp
-    src/animancer/AnimancerAnimator.cpp
-    src/animancer/SoloAnimation.cpp
-    src/animancer/NamedAnimancerAnimator.cpp
-    src/animancer/MixerStates.cpp
-    src/animancer/MixerTransitions.cpp
-    src/animancer/CustomFade.cpp
-    src/animancer/TimeSynchronizationGroup.cpp
-    src/animancer/ExitEvent.cpp
-    src/animancer/DontAllowFade.cpp
-    src/animancer/DirectionalAnimationSet.cpp
-    src/animancer/DirectionalClipTransition.cpp
+    src/hobi/EventSequence.cpp
+    src/hobi/EventDispatcher.cpp
+    src/hobi/HobiNode.cpp
+    src/hobi/HobiState.cpp
+    src/hobi/ClipState.cpp
+    src/hobi/RetargetClipState.cpp
+    src/hobi/HobiLayer.cpp
+    src/hobi/LayerList.cpp
+    src/hobi/StateDictionary.cpp
+    src/hobi/Transition.cpp
+    src/hobi/ClipTransitionSequence.cpp
+    src/hobi/HobiPlayable.cpp
+    src/hobi/HobiAnimator.cpp
+    src/hobi/SoloAnimation.cpp
+    src/hobi/NamedHobiAnimator.cpp
+    src/hobi/MixerStates.cpp
+    src/hobi/MixerTransitions.cpp
+    src/hobi/CustomFade.cpp
+    src/hobi/TimeSynchronizationGroup.cpp
+    src/hobi/ExitEvent.cpp
+    src/hobi/DontAllowFade.cpp
+    src/hobi/DirectionalAnimationSet.cpp
+    src/hobi/DirectionalClipTransition.cpp
 )
 add_library(anim::anim ALIAS anim)
 

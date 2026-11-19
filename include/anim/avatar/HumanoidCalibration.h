@@ -10,7 +10,7 @@
 // 从 Unity HumanPoseHandler 的“单肌肉”黄金数据反解：
 //   localRot = rest * pre * Rot(canonicalAxis, muscle * limit) * post
 //
-// 原项目本身不实现这层：AnimancerComponent/AnimancerPlayable 把 humanoid
+// 原项目本身不实现这层：Unity 组件把 humanoid
 // 交给 UnityEngine.Animator/Avatar（见 AnimancerPlayable.cs:491-497）。
 // 因此这里以 Unity HumanPoseHandler 为 oracle，而不是复制闭源 native 数学。
 //

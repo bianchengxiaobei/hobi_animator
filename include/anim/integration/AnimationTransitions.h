@@ -5,14 +5,14 @@
 #include <string_view>
 #include <vector>
 
-#include "anim/animancer/Transition.h"
+#include "anim/hobi/Transition.h"
 #include "anim/integration/AnimationAssets.h"
 #include "anim/integration/AnimationClipLibrary.h"
 
 namespace anim {
 
-class AnimancerAnimator;
-class AnimancerState;
+class HobiAnimator;
+class HobiState;
 
 class AnimationTransitions {
 public:
@@ -38,9 +38,9 @@ public:
     ClipTransition* transition(int index) noexcept;
     const ClipTransition* transition(int index) const noexcept;
 
-    AnimancerState* play(AnimancerAnimator& animator, std::string_view name,
+    HobiState* play(HobiAnimator& animator, std::string_view name,
                          std::string* error = nullptr);
-    bool bindRootBone(AnimancerAnimator& animator, std::string_view name,
+    bool bindRootBone(HobiAnimator& animator, std::string_view name,
                       std::string* error = nullptr) const;
 
 private:

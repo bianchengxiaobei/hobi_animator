@@ -3,9 +3,9 @@
 #include <cmath>
 #include <vector>
 
-#include "anim/animancer/DirectionalAnimationSet.h"
-#include "anim/animancer/DirectionalAnimationSet8.h"
-#include "anim/animancer/DirectionalClipTransition.h"
+#include "anim/hobi/DirectionalAnimationSet.h"
+#include "anim/hobi/DirectionalAnimationSet8.h"
+#include "anim/hobi/DirectionalClipTransition.h"
 #include "anim/clip/Clip.h"
 
 using namespace anim;

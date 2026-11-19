@@ -15,10 +15,10 @@
 #include "EventSidecar.h"
 #include "GltfImporter.h"
 #include "SkeletonLoader.h"
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/Transition.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/Transition.h"
 #include "anim/clip/ClipIO.h"
 #include "anim/integration/AnimationManifest.h"
 #include "anim/integration/Coordinate.h"
@@ -302,12 +302,12 @@ TEST(AnimPack, RuntimePlaysPackedClip) {
     const auto walk = loadClip(temp.path() / "Walk.ab");
     ASSERT_NE(walk, nullptr);
 
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton.skeleton);
     ClipTransition transition;
     transition.clip = walk.get();
     transition.fadeDurationValue = 0.0f;
-    AnimancerState* state = animator.play(transition);
+    HobiState* state = animator.play(transition);
     ASSERT_NE(state, nullptr);
     EXPECT_TRUE(state->isPlaying());
 

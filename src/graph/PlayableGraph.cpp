@@ -326,7 +326,7 @@ void PlayableGraph::evaluate(float deltaTime) {
         if (node != nullptr) node->prepareFrame(deltaTime);
     }
 
-    // prepare 中改图后重新编译（Animancer 的动态图依赖此行为）。
+    // prepare 中改图后重新编译（Hobi 的动态图依赖此行为）。
     if (_dirty) {
         if (!compile()) return;
     }

@@ -152,20 +152,20 @@ public:
 ## 9. 与动画的结合方式
 
 - 动画状态通常是 `StateBehaviour`：进入时 `layer->play(transition)`；退出时做清理。
-- 也可用 `DelegateState`：`onEnter = [&]{ animancer->play(attack); }`。
+- 也可用 `DelegateState`：`onEnter = [&]{ playable->play(attack); }`。
 - FSM 与动画解耦意味着：可以只做纯逻辑状态机，也可以驱动动画。
 
 ## 10. 文件清单
 
 ```
-include/anim/animancer/fsm/IState.h
-include/anim/animancer/fsm/StateChange.h
-include/anim/animancer/fsm/StateMachine.h         // keyless
-include/anim/animancer/fsm/StateMachine2.h        // keyed
-include/anim/animancer/fsm/WithDefault.h
-include/anim/animancer/fsm/InputBuffer.h
-include/anim/animancer/fsm/StateBehaviour.h
-include/anim/animancer/fsm/DelegateState.h
+include/anim/hobi/fsm/IState.h
+include/anim/hobi/fsm/StateChange.h
+include/anim/hobi/fsm/StateMachine.h         // keyless
+include/anim/hobi/fsm/StateMachine2.h        // keyed
+include/anim/hobi/fsm/WithDefault.h
+include/anim/hobi/fsm/InputBuffer.h
+include/anim/hobi/fsm/StateBehaviour.h
+include/anim/hobi/fsm/DelegateState.h
 ```
 
 ## 11. 与原项目对照校验点
@@ -178,7 +178,7 @@ include/anim/animancer/fsm/DelegateState.h
 
 ## 12. 实现状态（P5）
 
-已实现（`include/anim/animancer/fsm/`，头文件模板）：
+已实现（`include/anim/hobi/fsm/`，头文件模板）：
 
 | 文件 | 内容 |
 |---|---|

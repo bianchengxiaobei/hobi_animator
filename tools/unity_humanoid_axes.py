@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a calibrated AnimancerCpp avatar.json from a Unity .fbx.meta.
+"""Generate a calibrated hobi_animator avatar.json from a Unity .fbx.meta.
 
 No Unity Editor is required. The humanoid axis setup is a direct port of the
 Mecanim algorithms in Unity 4.7's Runtime/mecanim sources:
@@ -323,7 +323,7 @@ def setup_axes(axes, bone_index, axis_index, left, length, skeleton, global_pose
 
 
 def canonical_finger(side, finger, phalange):
-    # AnimancerCpp HumanBone spelling, e.g. LeftThumbProximal.
+    # hobi_animator HumanBone spelling, e.g. LeftThumbProximal.
     suffix = {0: "Proximal", 1: "Intermediate", 2: "Distal"}[phalange]
     return "{}{}{}".format(side, FINGER_NAMES[finger], suffix)
 

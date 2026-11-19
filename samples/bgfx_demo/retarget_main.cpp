@@ -410,7 +410,7 @@ int main(int argc, char** argv) {
     windowClass.lpfnWndProc = windowProc;
     windowClass.hInstance = instance;
     windowClass.hCursor = LoadCursorW(nullptr, MAKEINTRESOURCEW(32512));
-    windowClass.lpszClassName = L"AnimancerHumanoidRetargetDemo";
+    windowClass.lpszClassName = L"HobiHumanoidRetargetDemo";
     if (RegisterClassExW(&windowClass) == 0) {
         std::cerr << "RegisterClassEx failed\n";
         return 1;
@@ -420,7 +420,7 @@ int main(int argc, char** argv) {
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
     if (!options.headless) {
         window = CreateWindowExW(0, windowClass.lpszClassName,
-                                 L"AnimancerCpp humanoid retarget acceptance",
+                                 L"hobi_animator humanoid retarget acceptance",
                                  WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
                                  rect.right - rect.left, rect.bottom - rect.top, nullptr,
                                  nullptr, instance, nullptr);

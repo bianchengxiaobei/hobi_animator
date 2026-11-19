@@ -5,7 +5,7 @@
 
 // 骨骼遮罩：按骨骼索引的权重（0..1）。空数组表示“全部为 1”。
 //
-// 文档：docs/06-Playable图.md §5、docs/07-Animancer门面.md（层）
+// 文档：docs/06-Playable图.md §5、docs/07-Hobi门面.md（层）
 namespace anim {
 
 struct AvatarMask {

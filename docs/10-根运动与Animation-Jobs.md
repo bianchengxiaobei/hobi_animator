@@ -84,7 +84,7 @@ public:
 };
 ```
 
-插入/移除：`AnimancerPlayable::insertOutputJob(job)` / `removePlayable(node)`（对齐原 `InsertOutputJob` / `AnimancerUtilities.RemovePlayable`，`AnimancerPlayable.cs:513-535`）。
+插入/移除：`HobiPlayable::insertOutputJob(job)` / `removePlayable(node)`（对齐原 `InsertOutputJob` / `AnimancerUtilities.RemovePlayable`，`AnimancerPlayable.cs:513-535`）。
 
 ### 6. 内置 Job
 
@@ -188,8 +188,8 @@ include/anim/jobs/TwoBoneIK.h
 include/anim/jobs/Damping.h
 include/anim/jobs/SimpleLean.h
 include/anim/jobs/AnimatedValue.h
-include/anim/animancer/rootmotion/RootMotion.h
-include/anim/animancer/rootmotion/Targets.h
+include/anim/hobi/rootmotion/RootMotion.h
+include/anim/hobi/rootmotion/Targets.h
 ```
 
 ### 11. 对照校验点
@@ -204,15 +204,15 @@ include/anim/animancer/rootmotion/Targets.h
 
 ### 12.1 根运动
 
-- `include/anim/animancer/rootmotion/RootMotion.h`
+- `include/anim/hobi/rootmotion/RootMotion.h`
   - `IRootMotionTarget`（`applyRootMotion` + `enabled`）。
   - `RootMotionRedirect`（`applyRootMotion` 开关，对齐 `RedirectRootMotion.ApplyRootMotion`）。
-- `include/anim/animancer/rootmotion/Targets.h`
+- `include/anim/hobi/rootmotion/Targets.h`
   - `RootMotionToTransform`：`position += deltaPosition; rotation *= deltaRotation`
     （对齐 `RedirectRootMotionToTransform.cs:25-26`）。
   - `RootMotionToCharacterController` / `RootMotionToRigidbody`
     （通过 `ICharacterControllerLike` / `IRigidbodyLike` 适配器）。
-- `AnimancerPlayable`：
+- `HobiPlayable`：
   - `setRootMotionTarget()` / `rootMotionTarget()` / `rootMotionDelta()`；
   - `setRootMotionRootBone()`；
   - `evaluate()` 在 `PostUpdate` 后用上一帧 `Pose` 调 `extractRootMotion()`，
@@ -237,10 +237,10 @@ include/anim/animancer/rootmotion/Targets.h
 - `include/anim/jobs/SimpleLean.h` + `src/jobs/SimpleLean.cpp`：
   - 移植 `SimpleLean.Job`：总角度平均分摊，`offset * worldRotation`。
 - `include/anim/jobs/AnimatedValue.h`：`AnimatedFloat/Bool/Int` 读 `Curve` 或 `PropertyChannel`。
-- `AnimancerPlayable::insertOutputJob(job, scheduler)`：
+- `HobiPlayable::insertOutputJob(job, scheduler)`：
   - 对齐 `AnimancerPlayable.cs:527-535`：用 `ScriptPoseNode` 接在当前输出之后；
   - 可重复调用（后插入者成为最终输出）。
-- `AnimancerPlayable::removePlayable(handle)`：
+- `HobiPlayable::removePlayable(handle)`：
   - 对齐 `AnimancerUtilities.RemovePlayable`：把节点输入重新接到所有父节点；
   - 若节点是图输出，则先断开再恢复原输入为输出。
 

@@ -4,7 +4,7 @@
 #include "anim/core/Hash.h"
 #include "anim/integration/ecs/entt/Components.h"
 #include "anim/integration/ecs/entt/Systems.h"
-#include "anim/animancer/AnimancerPlayable.h"
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/jobs/JobScheduler.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -24,7 +24,7 @@ TEST(Entt, BindsJobsAndSyncsOutputs) {
     Skeleton skeleton;
     skeleton.addBone(hashString("Root"), -1, Transform{});
 
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
     animator.playable().defaultFadeDuration = 0.0f;
 
@@ -35,7 +35,7 @@ TEST(Entt, BindsJobsAndSyncsOutputs) {
     OffsetJob job;
     entt::registry registry;
     const entt::entity entity = registry.create();
-    registry.emplace<ecs::AnimancerComponent>(entity, ecs::AnimancerComponent{&animator});
+    registry.emplace<ecs::HobiComponent>(entity, ecs::HobiComponent{&animator});
     registry.emplace<ecs::JobListComponent>(entity, ecs::JobListComponent{{&job}});
     registry.emplace<ecs::PoseComponent>(entity);
     registry.emplace<ecs::SkinningComponent>(entity);

@@ -4,12 +4,12 @@
 #include <limits>
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerLayer.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/ClipTransitionSequence.h"
-#include "anim/animancer/LayerList.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiLayer.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/ClipTransitionSequence.h"
+#include "anim/hobi/LayerList.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -77,7 +77,7 @@ TEST(ClipTransitionSequence, InvalidOtherInvalidatesSequence) {
 
 TEST(ClipTransitionSequence, MovesEndEventToLastTransition) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip first = makeClip(0.5f);
@@ -89,9 +89,9 @@ TEST(ClipTransitionSequence, MovesEndEventToLastTransition) {
 
     int endCount = 0;
     sequence.eventSequence.endEvent() =
-        AnimancerEvent(std::numeric_limits<float>::quiet_NaN(), [&endCount] { ++endCount; });
+        HobiEvent(std::numeric_limits<float>::quiet_NaN(), [&endCount] { ++endCount; });
 
-    AnimancerState* state = animator.play(sequence);
+    HobiState* state = animator.play(sequence);
     ASSERT_NE(state, nullptr);
     EXPECT_TRUE(sequence.eventSequence.endEvent().hasCallback());
     EXPECT_TRUE(sequence.others[0].eventSequence.endEvent().hasCallback());
@@ -106,7 +106,7 @@ TEST(ClipTransitionSequence, MovesEndEventToLastTransition) {
 
 TEST(ClipTransitionSequence, PlaysTransitionsInOrder) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip first = makeClip(0.5f);
@@ -119,7 +119,7 @@ TEST(ClipTransitionSequence, PlaysTransitionsInOrder) {
     sequence.others.push_back(makeTransition(third));
 
     ASSERT_NE(animator.play(sequence), nullptr);
-    AnimancerLayer* layer = animator.playable().layers().getLayer(0);
+    HobiLayer* layer = animator.playable().layers().getLayer(0);
 
     animator.update(0.6f);
     ASSERT_NE(layer->currentState(), nullptr);

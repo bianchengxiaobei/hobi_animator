@@ -2,16 +2,16 @@
 
 #include <vector>
 
-#include "anim/animancer/AnimancerAnimator.h"
-#include "anim/animancer/AnimancerLayer.h"
-#include "anim/animancer/AnimancerPlayable.h"
-#include "anim/animancer/AnimancerState.h"
-#include "anim/animancer/ClipTransitionSequence.h"
-#include "anim/animancer/LayerList.h"
-#include "anim/animancer/MixerStates.h"
-#include "anim/animancer/MixerTransitions.h"
-#include "anim/animancer/StateDictionary.h"
-#include "anim/animancer/Transition.h"
+#include "anim/hobi/HobiAnimator.h"
+#include "anim/hobi/HobiLayer.h"
+#include "anim/hobi/HobiPlayable.h"
+#include "anim/hobi/HobiState.h"
+#include "anim/hobi/ClipTransitionSequence.h"
+#include "anim/hobi/LayerList.h"
+#include "anim/hobi/MixerStates.h"
+#include "anim/hobi/MixerTransitions.h"
+#include "anim/hobi/StateDictionary.h"
+#include "anim/hobi/Transition.h"
 #include "anim/clip/Clip.h"
 #include "anim/skeleton/Skeleton.h"
 
@@ -42,13 +42,13 @@ bool contains(const std::vector<const Clip*>& clips, const Clip* clip) {
 
 TEST(AnimationClipCollection, StateTreeGathersUniqueClips) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
 
-    AnimancerLayer* layer = root.layers().getLayer(0);
+    HobiLayer* layer = root.layers().getLayer(0);
     auto* mixer = new ManualMixerState(&root);
     layer->addChild(mixer);
 
@@ -68,7 +68,7 @@ TEST(AnimationClipCollection, StateTreeGathersUniqueClips) {
 
 TEST(AnimationClipCollection, PlayableGathersAcrossLayers) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
     root.layers().setCount(2);
 
@@ -88,19 +88,19 @@ TEST(AnimationClipCollection, PlayableGathersAcrossLayers) {
 
 TEST(AnimationClipCollection, StateDictionaryCurrentTracksLayerZero) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
-    AnimancerLayer* layer = root.layers().getLayer(0);
+    HobiLayer* layer = root.layers().getLayer(0);
 
     EXPECT_EQ(root.states().current(), nullptr);
 
-    AnimancerState* stateA = layer->play(clipA);
+    HobiState* stateA = layer->play(clipA);
     EXPECT_EQ(root.states().current(), stateA);
 
-    AnimancerState* stateB = layer->play(clipB);
+    HobiState* stateB = layer->play(clipB);
     EXPECT_EQ(root.states().current(), stateB);
 
     std::vector<const Clip*> clips;
@@ -112,19 +112,19 @@ TEST(AnimationClipCollection, StateDictionaryCurrentTracksLayerZero) {
 
 TEST(AnimationClipCollection, CreateIfNewCreatesWithoutDuplicates) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerPlayable root;
+    HobiPlayable root;
     root.createOutput(skeleton);
 
     const BoneLocalClip clipA = makeClip(1.0f);
     const BoneLocalClip clipB = makeClip(1.0f);
     const BoneLocalClip clipC = makeClip(1.0f);
-    AnimancerLayer* layer = root.layers().getLayer(0);
+    HobiLayer* layer = root.layers().getLayer(0);
 
     root.states().createIfNew({&clipA, &clipB, nullptr, &clipA});
 
     ASSERT_EQ(root.states().states().size(), 2u);
-    AnimancerState* stateA = root.states().get(Key::fromPointer(&clipA));
-    AnimancerState* stateB = root.states().get(Key::fromPointer(&clipB));
+    HobiState* stateA = root.states().get(Key::fromPointer(&clipA));
+    HobiState* stateB = root.states().get(Key::fromPointer(&clipB));
     ASSERT_NE(stateA, nullptr);
     ASSERT_NE(stateB, nullptr);
     EXPECT_EQ(stateA->parent(), nullptr);
@@ -205,7 +205,7 @@ TEST(AnimationClipCollection, TransitionsGatherNestedClips) {
 
 TEST(AnimationClipCollection, AnimatorForwardsToPlayable) {
     Skeleton skeleton = makeSkeleton();
-    AnimancerAnimator animator;
+    HobiAnimator animator;
     animator.initialize(skeleton);
 
     const BoneLocalClip clip = makeClip(1.0f);

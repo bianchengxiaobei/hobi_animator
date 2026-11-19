@@ -4,13 +4,13 @@
 #include <stdexcept>
 #include <string>
 
-#include "anim/animancer/fsm/DelegateState.h"
-#include "anim/animancer/fsm/InputBuffer.h"
-#include "anim/animancer/fsm/StateBehaviour.h"
-#include "anim/animancer/fsm/StateChange.h"
-#include "anim/animancer/fsm/StateMachine.h"
-#include "anim/animancer/fsm/StateMachine2.h"
-#include "anim/animancer/fsm/WithDefault.h"
+#include "anim/hobi/fsm/DelegateState.h"
+#include "anim/hobi/fsm/InputBuffer.h"
+#include "anim/hobi/fsm/StateBehaviour.h"
+#include "anim/hobi/fsm/StateChange.h"
+#include "anim/hobi/fsm/StateMachine.h"
+#include "anim/hobi/fsm/StateMachine2.h"
+#include "anim/hobi/fsm/WithDefault.h"
 
 using namespace anim::fsm;
 
