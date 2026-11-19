@@ -1,0 +1,16 @@
+build/
+build_pack/
+build_entt/
+out/
+.vs/
+.vscode/
+*.user
+*.suo
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+build_*.txt
+*_log.txt
+py_axes3.txt
+__pycache__/
+*.pyc

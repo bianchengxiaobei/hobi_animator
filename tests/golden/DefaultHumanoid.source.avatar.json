@@ -1,0 +1,3494 @@
+{
+  "name": "DefaultHumanoid",
+  "hipsHeight": 0.963794,
+  "armTwist": 0.5,
+  "foreArmTwist": 0.5,
+  "upperLegTwist": 0.5,
+  "legTwist": 0.5,
+  "bones": {
+    "Hips": "Hips",
+    "LeftUpperLeg": "LeftUpLeg",
+    "RightUpperLeg": "RightUpLeg",
+    "LeftLowerLeg": "LeftLeg",
+    "RightLowerLeg": "RightLeg",
+    "LeftFoot": "LeftFoot",
+    "RightFoot": "RightFoot",
+    "Spine": "Spine",
+    "Chest": "Chest",
+    "Neck": "Neck",
+    "Head": "Head",
+    "LeftShoulder": "LeftShoulder",
+    "RightShoulder": "RightShoulder",
+    "LeftUpperArm": "LeftArm",
+    "RightUpperArm": "RightArm",
+    "LeftLowerArm": "LeftForeArm",
+    "RightLowerArm": "RightForeArm",
+    "LeftHand": "LeftHand",
+    "RightHand": "RightHand",
+    "LeftToes": "LeftToes",
+    "RightToes": "RightToes",
+    "LeftEye": "LeftEye",
+    "RightEye": "RightEye",
+    "Jaw": "Jaw",
+    "LeftThumbProximal": "LeftHandThumb1",
+    "LeftThumbIntermediate": "LeftHandThumb2",
+    "LeftThumbDistal": "LeftHandThumb3",
+    "LeftIndexProximal": "LeftHandIndex1",
+    "LeftIndexIntermediate": "LeftHandIndex2",
+    "LeftIndexDistal": "LeftHandIndex3",
+    "LeftMiddleProximal": "LeftHandMiddle1",
+    "LeftMiddleIntermediate": "LeftHandMiddle2",
+    "LeftMiddleDistal": "LeftHandMiddle3",
+    "LeftRingProximal": "LeftHandRing1",
+    "LeftRingIntermediate": "LeftHandRing2",
+    "LeftRingDistal": "LeftHandRing3",
+    "LeftLittleProximal": "LeftHandPinky1",
+    "LeftLittleIntermediate": "LeftHandPinky2",
+    "LeftLittleDistal": "LeftHandPinky3",
+    "RightThumbProximal": "RightHandThumb1",
+    "RightThumbIntermediate": "RightHandThumb2",
+    "RightThumbDistal": "RightHandThumb3",
+    "RightIndexProximal": "RightHandIndex1",
+    "RightIndexIntermediate": "RightHandIndex2",
+    "RightIndexDistal": "RightHandIndex3",
+    "RightMiddleProximal": "RightHandMiddle1",
+    "RightMiddleIntermediate": "RightHandMiddle2",
+    "RightMiddleDistal": "RightHandMiddle3",
+    "RightRingProximal": "RightHandRing1",
+    "RightRingIntermediate": "RightHandRing2",
+    "RightRingDistal": "RightHandRing3",
+    "RightLittleProximal": "RightHandPinky1",
+    "RightLittleIntermediate": "RightHandPinky2",
+    "RightLittleDistal": "RightHandPinky3"
+  },
+  "preRot": {
+    "Hips": [
+      -0.4559346088863441,
+      -0.5404846273666408,
+      0.4559346088863441,
+      0.5404846273666408
+    ],
+    "LeftUpperLeg": [
+      0.5998296343162532,
+      -0.35676875587970613,
+      0.6307102877381683,
+      -0.3393007479586705
+    ],
+    "RightUpperLeg": [
+      0.6307102634559816,
+      -0.3393007625673343,
+      0.5998296595425521,
+      -0.3567687425007659
+    ],
+    "LeftLowerLeg": [
+      -0.05133640807086454,
+      0.7094966440240185,
+      -0.05196510998963556,
+      0.7009127710841071
+    ],
+    "RightLowerLeg": [
+      -0.051965109989635584,
+      0.7009127710841071,
+      -0.05133640807086452,
+      0.7094966440240186
+    ],
+    "LeftFoot": [
+      -0.5,
+      0.5,
+      -0.5,
+      0.5
+    ],
+    "RightFoot": [
+      -0.5,
+      0.5,
+      -0.5,
+      0.5
+    ],
+    "Spine": [
+      -0.46550130813865365,
+      -0.5322673502303163,
+      0.4655013081386536,
+      0.5322673502303163
+    ],
+    "Chest": [
+      0.5329688939053031,
+      0.4646979213740446,
+      -0.5329688939053031,
+      -0.4646979213740446
+    ],
+    "Neck": [
+      -0.4727842830193314,
+      -0.5258089213106761,
+      0.47278428301933134,
+      0.5258089213106761
+    ],
+    "Head": [
+      -0.5,
+      -0.5,
+      0.5,
+      0.5
+    ],
+    "LeftShoulder": [
+      -0.000679550623303934,
+      -0.0032871375126040563,
+      0.9792872098571122,
+      0.20244824906181794
+    ],
+    "RightShoulder": [
+      -0.20243739306233655,
+      -0.9792894571146527,
+      0.0032863287684172736,
+      0.000679056286180675
+    ],
+    "LeftUpperArm": [
+      0.24377451235130831,
+      -0.014971637217833981,
+      0.9112140202740748,
+      -0.33172103711229617
+    ],
+    "RightUpperArm": [
+      -0.006934273431015629,
+      0.21347238810056338,
+      0.32122352018537315,
+      -0.9226033305003529
+    ],
+    "LeftLowerArm": [
+      0.4536709515624631,
+      0.5501007931572278,
+      0.5333308192887948,
+      -0.45511539445830784
+    ],
+    "RightLowerArm": [
+      -0.5244473159851754,
+      -0.48340091707288785,
+      -0.4374016835097728,
+      0.547684519949079
+    ],
+    "LeftHand": [
+      3.646890302584432e-05,
+      -0.0017026851640964916,
+      0.99976925366059,
+      -0.02141352302162979
+    ],
+    "RightHand": [
+      -0.0014610970836879962,
+      0.011234226108238383,
+      -0.022580701810749573,
+      -0.9996808336988336
+    ],
+    "LeftToes": [
+      0.7071067811865476,
+      0.0,
+      0.7071067811865476,
+      0.0
+    ],
+    "RightToes": [
+      0.7071067811865476,
+      0.0,
+      0.7071067811865476,
+      0.0
+    ],
+    "LeftEye": [
+      0.7071067811865476,
+      0.0,
+      0.7071067811865476,
+      0.0
+    ],
+    "RightEye": [
+      0.7071067811865476,
+      0.0,
+      0.7071067811865476,
+      0.0
+    ],
+    "Jaw": [
+      0.7042602795945133,
+      -0.0633834251635062,
+      0.7042602795945133,
+      -0.0633834251635062
+    ],
+    "LeftThumbProximal": [
+      0.2650423168423265,
+      0.5802790259057816,
+      0.5569385511980686,
+      -0.5318348169931012
+    ],
+    "LeftThumbIntermediate": [
+      0.03204938853004444,
+      0.6640706633869565,
+      0.7267146292279895,
+      -0.17282603504589122
+    ],
+    "LeftThumbDistal": [
+      0.032049369829050406,
+      0.6640705879664933,
+      0.7267146979815895,
+      -0.17282603920973122
+    ],
+    "LeftIndexProximal": [
+      0.08988578303341138,
+      0.05290796340661784,
+      0.9541224745436672,
+      -0.28066278162111885
+    ],
+    "LeftIndexIntermediate": [
+      0.0017455753875995927,
+      0.06845552000505546,
+      0.9492545117489457,
+      -0.3069636243460688
+    ],
+    "LeftIndexDistal": [
+      0.001745499835245002,
+      0.06845554942386768,
+      0.9492545105452159,
+      -0.30696362193746085
+    ],
+    "LeftMiddleProximal": [
+      0.03316681879899948,
+      0.02006568802240597,
+      0.9573448925418562,
+      -0.286335619542808
+    ],
+    "LeftMiddleIntermediate": [
+      -0.00028631244348454693,
+      0.011572212772583848,
+      0.9496395729950577,
+      -0.31313045734724526
+    ],
+    "LeftMiddleDistal": [
+      -0.0002863105486973239,
+      0.011572212477116829,
+      0.9496395691371275,
+      -0.313130469059951
+    ],
+    "LeftRingProximal": [
+      -0.06352801839526404,
+      0.00030427311792718693,
+      0.9557197884310992,
+      -0.2873391450844377
+    ],
+    "LeftRingIntermediate": [
+      -0.0007643305743890802,
+      -0.0059292005329978905,
+      0.9496170145816236,
+      -0.3133556860771746
+    ],
+    "LeftRingDistal": [
+      -0.0007643479729987054,
+      -0.005929191173921313,
+      0.9496170036679924,
+      -0.3133557192853252
+    ],
+    "LeftLittleProximal": [
+      -0.09946427998435121,
+      -0.00033593871584345855,
+      0.9527961867934805,
+      -0.2868556615864097
+    ],
+    "LeftLittleIntermediate": [
+      -0.0008354579727178999,
+      0.00252890984988607,
+      0.9495952688888473,
+      -0.3134672740955027
+    ],
+    "LeftLittleDistal": [
+      -0.00083542414542566,
+      0.0025288983155398303,
+      0.9495952683816369,
+      -0.313467275815218
+    ],
+    "RightThumbProximal": [
+      -0.5804351138126244,
+      -0.264966339098293,
+      -0.5318980036202108,
+      0.5567516785273381
+    ],
+    "RightThumbIntermediate": [
+      -0.6642538973661859,
+      -0.03191807902662643,
+      -0.17290843528283548,
+      0.7265333227547959
+    ],
+    "RightThumbDistal": [
+      -0.6642538692667552,
+      -0.03191807218603112,
+      -0.17290843669822858,
+      0.7265333484091743
+    ],
+    "RightIndexProximal": [
+      -0.0037659497253127983,
+      -0.2524689231574052,
+      -0.27734543653142396,
+      0.9269977180649369
+    ],
+    "RightIndexIntermediate": [
+      -0.005398411625335486,
+      -0.18720528054749686,
+      -0.3996788626654397,
+      0.8973192557977997
+    ],
+    "RightIndexDistal": [
+      -0.005398395998868258,
+      -0.18720532449050675,
+      -0.3996788826219967,
+      0.8973192378351617
+    ],
+    "RightMiddleProximal": [
+      0.0018959929514889666,
+      -0.10779505605874638,
+      -0.284991630338771,
+      0.9524475847713978
+    ],
+    "RightMiddleIntermediate": [
+      -0.004079145300455088,
+      -0.022302044234336352,
+      -0.41758036550081323,
+      0.9083570981419117
+    ],
+    "RightMiddleDistal": [
+      -0.00407914573502104,
+      -0.02230204482297254,
+      -0.41758039902616423,
+      0.9083570827135857
+    ],
+    "RightRingProximal": [
+      -0.00882176628897159,
+      0.09345995417623643,
+      -0.3021828546607234,
+      0.948616326948896
+    ],
+    "RightRingIntermediate": [
+      -0.01823545746566673,
+      0.07187100804598848,
+      -0.4301218753960884,
+      0.8997206225263613
+    ],
+    "RightRingDistal": [
+      -0.018235462433687833,
+      0.07187100820046277,
+      -0.4301218633796397,
+      0.8997206281579326
+    ],
+    "RightLittleProximal": [
+      -0.04635389186774831,
+      0.2588808633728684,
+      -0.3042770768007901,
+      0.915558559471538
+    ],
+    "RightLittleIntermediate": [
+      -0.06186659728616832,
+      0.1792286817879474,
+      -0.3187595383599282,
+      0.9286775330917354
+    ],
+    "RightLittleDistal": [
+      -0.06186659979864221,
+      0.17922868488646002,
+      -0.3187595360035335,
+      0.9286775331351764
+    ]
+  },
+  "postRot": {
+    "Hips": [
+      0.4559346088863441,
+      0.5404846273666408,
+      -0.4559346088863441,
+      0.5404846273666408
+    ],
+    "LeftUpperLeg": [
+      -0.4915505437561788,
+      0.507876491117259,
+      -0.5168567325682596,
+      -0.4830099902717215
+    ],
+    "RightUpperLeg": [
+      -0.5168567125771032,
+      0.48301001091262946,
+      -0.49155056434093336,
+      -0.5078764719085549
+    ],
+    "LeftLowerLeg": [
+      0.48983454970221546,
+      -0.5101324244066476,
+      0.495833409631275,
+      0.5039605672872115
+    ],
+    "RightLowerLeg": [
+      0.495833409631275,
+      -0.5039605672872115,
+      0.48983454970221546,
+      0.5101324244066476
+    ],
+    "LeftFoot": [
+      0.5,
+      -0.5,
+      0.5,
+      0.5
+    ],
+    "RightFoot": [
+      0.5,
+      -0.5,
+      0.5,
+      0.5
+    ],
+    "Spine": [
+      0.46550130813865365,
+      0.5322673502303163,
+      -0.4655013081386536,
+      0.5322673502303163
+    ],
+    "Chest": [
+      -0.5329688939053031,
+      -0.4646979213740446,
+      0.5329688939053031,
+      -0.4646979213740446
+    ],
+    "Neck": [
+      0.4727842830193314,
+      0.5258089213106761,
+      -0.47278428301933134,
+      0.5258089213106761
+    ],
+    "Head": [
+      0.5,
+      0.5,
+      -0.5,
+      0.5
+    ],
+    "LeftShoulder": [
+      0.000679550623303937,
+      0.0032871375126040563,
+      -0.9792872098571123,
+      0.20244824906181794
+    ],
+    "RightShoulder": [
+      0.20243739306233655,
+      0.9792894571146528,
+      -0.0032863287684172736,
+      0.000679056286180675
+    ],
+    "LeftUpperArm": [
+      0.0,
+      0.0012617053517430458,
+      -0.999999204049486,
+      2.5153489354414524e-17
+    ],
+    "RightUpperArm": [
+      0.0012609417690268216,
+      0.03291155980904373,
+      0.01179679676460439,
+      -0.9993878500576667
+    ],
+    "LeftLowerArm": [
+      1.2663480754712238e-16,
+      -0.7059820000137762,
+      -0.7082297760307372,
+      -1.344410628068765e-16
+    ],
+    "RightLowerArm": [
+      0.7052544059746205,
+      0.039022723400581084,
+      -0.023175956951816044,
+      0.7075000529548775
+    ],
+    "LeftHand": [
+      -3.646890302584439e-05,
+      0.0017026851640964914,
+      -0.99976925366059,
+      -0.021413523021629792
+    ],
+    "RightHand": [
+      0.0014610970836879966,
+      -0.011234226108238383,
+      0.022580701810749577,
+      -0.9996808336988336
+    ],
+    "LeftToes": [
+      -0.7071067811865476,
+      0.0,
+      -0.7071067811865476,
+      0.0
+    ],
+    "RightToes": [
+      -0.7071067811865476,
+      0.0,
+      -0.7071067811865476,
+      0.0
+    ],
+    "LeftEye": [
+      -0.7071067811865476,
+      0.0,
+      -0.7071067811865476,
+      0.0
+    ],
+    "RightEye": [
+      -0.7071067811865476,
+      0.0,
+      -0.7071067811865476,
+      0.0
+    ],
+    "Jaw": [
+      -0.7071067811865476,
+      0.0,
+      -0.7071067811865476,
+      0.0
+    ],
+    "LeftThumbProximal": [
+      -0.26580941495751725,
+      -0.5992026798499004,
+      -0.6496992501784625,
+      -0.38495764403137117
+    ],
+    "LeftThumbIntermediate": [
+      -0.1652689712956064,
+      -0.6236188013253402,
+      -0.6985923586062196,
+      -0.30944219857258803
+    ],
+    "LeftThumbDistal": [
+      -0.16526893845565582,
+      -0.6236187289766096,
+      -0.6985924230023997,
+      -0.3094422165364236
+    ],
+    "LeftIndexProximal": [
+      -0.014890725737272785,
+      0.002618019203498263,
+      -0.9998854787545545,
+      0.0006645586827970219
+    ],
+    "LeftIndexIntermediate": [
+      9.252123241520037e-07,
+      -0.005689380064115796,
+      -0.9999838153458378,
+      -1.0702898198206065e-07
+    ],
+    "LeftIndexDistal": [
+      1.006141525733414e-06,
+      -0.005689384884765357,
+      -0.9999838153183325,
+      -1.0987504332066155e-07
+    ],
+    "LeftMiddleProximal": [
+      0.00480340059422845,
+      0.001788171476562876,
+      -0.9999868637669688,
+      4.5596093116994e-05
+    ],
+    "LeftMiddleIntermediate": [
+      -5.54637923251917e-08,
+      0.000914516330966651,
+      -0.9999995818298351,
+      -1.7951641718059937e-07
+    ],
+    "LeftMiddleDistal": [
+      -5.750137036658609e-08,
+      0.0009145159702397826,
+      -0.9999995818301627,
+      -1.918236009167129e-07
+    ],
+    "LeftRingProximal": [
+      0.02588233594024801,
+      0.0017005070194939485,
+      -0.9996635090157449,
+      -0.0002858399560707003
+    ],
+    "LeftRingIntermediate": [
+      2.6744134651976994e-07,
+      0.0024383611522978592,
+      -0.999997027192991,
+      5.981425110355239e-10
+    ],
+    "LeftRingDistal": [
+      2.8701629945556545e-07,
+      0.002438357756059285,
+      -0.9999970272012664,
+      -3.429425292356124e-08
+    ],
+    "LeftLittleProximal": [
+      0.02348289557805183,
+      0.002352667688393999,
+      -0.9997213159005025,
+      -0.000555971389592054
+    ],
+    "LeftLittleIntermediate": [
+      -7.675143949731557e-07,
+      0.002666411720450304,
+      -0.9999964354850964,
+      -0.00013879859257806733
+    ],
+    "LeftLittleDistal": [
+      -8.03260597353333e-07,
+      0.002666412071900752,
+      -0.9999964354839064,
+      -0.0001388002133874514
+    ],
+    "RightThumbProximal": [
+      -0.5993897066230708,
+      -0.2656982557302936,
+      -0.38503387904657055,
+      -0.6495270036592317
+    ],
+    "RightThumbIntermediate": [
+      -0.6238221647114495,
+      -0.16517887256438618,
+      -0.30949030225340324,
+      -0.6984107671593965
+    ],
+    "RightThumbDistal": [
+      -0.6238221377304574,
+      -0.16517886044963506,
+      -0.3094903088167378,
+      -0.6984107912156586
+    ],
+    "RightIndexProximal": [
+      0.002110610930236996,
+      -0.18580510081755128,
+      0.009679900122467756,
+      -0.9825366707483746
+    ],
+    "RightIndexIntermediate": [
+      -0.006028000795087487,
+      -0.201313294955598,
+      -0.0922938129810055,
+      -0.9751504871382477
+    ],
+    "RightIndexDistal": [
+      -0.006028000577336839,
+      -0.20131334274004425,
+      -0.09229383467626623,
+      -0.9751504752214497
+    ],
+    "RightMiddleProximal": [
+      0.0012863169069795488,
+      -0.07307631763049295,
+      0.002292744246232655,
+      -0.9973228867895308
+    ],
+    "RightMiddleIntermediate": [
+      0.00042911377886369127,
+      -0.025089748913507244,
+      -0.11183437137409326,
+      -0.9934099827061248
+    ],
+    "RightMiddleDistal": [
+      0.0004291129901716801,
+      -0.025089749752966198,
+      -0.111834408034501,
+      -0.993409978558172
+    ],
+    "RightRingProximal": [
+      0.0016157205358893238,
+      0.05732839377637034,
+      -0.01604233131183612,
+      -0.9982251691478493
+    ],
+    "RightRingIntermediate": [
+      0.001935215879248137,
+      0.07552780173524695,
+      -0.12626170849738538,
+      -0.9891156590974906
+    ],
+    "RightRingDistal": [
+      0.0019352111894163173,
+      0.07552780339503988,
+      -0.12626169532097134,
+      -0.98911566066191
+    ],
+    "RightLittleProximal": [
+      0.002283130718883845,
+      0.19203133585545634,
+      -0.023535010558650142,
+      -0.9811038969659094
+    ],
+    "RightLittleIntermediate": [
+      0.0021182750662341716,
+      0.18796919164911768,
+      -0.012623640173478192,
+      -0.9820915128491293
+    ],
+    "RightLittleDistal": [
+      0.0021182736514141123,
+      0.18796919539075385,
+      -0.01262363793788043,
+      -0.9820915121647799
+    ]
+  },
+  "uvw": {
+    "Hips": [
+      null,
+      null,
+      null
+    ],
+    "LeftUpperLeg": [
+      {
+        "muscle": "Left Upper Leg Twist In-Out",
+        "sign": 1.0,
+        "min": -90.0,
+        "max": 50.0
+      },
+      {
+        "muscle": "Left Upper Leg In-Out",
+        "sign": 1.0,
+        "min": -60.0,
+        "max": 60.0
+      },
+      {
+        "muscle": "Left Upper Leg Front-Back",
+        "sign": 1.0,
+        "min": -60.0,
+        "max": 60.0
+      }
+    ],
+    "RightUpperLeg": [
+      {
+        "muscle": "Right Upper Leg Twist In-Out",
+        "sign": -1.0,
+        "min": -90.0,
+        "max": 50.0
+      },
+      {
+        "muscle": "Right Upper Leg In-Out",
+        "sign": -1.0,
+        "min": -60.0,
+        "max": 60.0
+      },
+      {
+        "muscle": "Right Upper Leg Front-Back",
+        "sign": 1.0,
+        "min": -60.0,
+        "max": 60.0
+      }
+    ],
+    "LeftLowerLeg": [
+      {
+        "muscle": "Left Lower Leg Twist In-Out",
+        "sign": 1.0,
+        "min": -80.0,
+        "max": 80.0
+      },
+      null,
+      {
+        "muscle": "Left Lower Leg Stretch",
+        "sign": -1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "RightLowerLeg": [
+      {
+        "muscle": "Right Lower Leg Twist In-Out",
+        "sign": -1.0,
+        "min": -80.0,
+        "max": 80.0
+      },
+      null,
+      {
+        "muscle": "Right Lower Leg Stretch",
+        "sign": -1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "LeftFoot": [
+      null,
+      {
+        "muscle": "Left Foot Twist In-Out",
+        "sign": 1.0,
+        "min": -30.0,
+        "max": 30.0
+      },
+      {
+        "muscle": "Left Foot Up-Down",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightFoot": [
+      null,
+      {
+        "muscle": "Right Foot Twist In-Out",
+        "sign": -1.0,
+        "min": -30.0,
+        "max": 30.0
+      },
+      {
+        "muscle": "Right Foot Up-Down",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "Spine": [
+      {
+        "muscle": "Spine Twist Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Spine Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Spine Front-Back",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      }
+    ],
+    "Chest": [
+      {
+        "muscle": "Chest Twist Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Chest Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Chest Front-Back",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      }
+    ],
+    "Neck": [
+      {
+        "muscle": "Neck Turn Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Neck Tilt Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Neck Nod Down-Up",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      }
+    ],
+    "Head": [
+      {
+        "muscle": "Head Turn Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Head Tilt Left-Right",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Head Nod Down-Up",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      }
+    ],
+    "LeftShoulder": [
+      null,
+      {
+        "muscle": "Left Shoulder Front-Back",
+        "sign": 1.0,
+        "min": -15.0,
+        "max": 15.0
+      },
+      {
+        "muscle": "Left Shoulder Down-Up",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightShoulder": [
+      null,
+      {
+        "muscle": "Right Shoulder Front-Back",
+        "sign": 1.0,
+        "min": -15.0,
+        "max": 15.0
+      },
+      {
+        "muscle": "Right Shoulder Down-Up",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftUpperArm": [
+      {
+        "muscle": "Left Arm Twist In-Out",
+        "sign": 1.0,
+        "min": -60.0,
+        "max": 100.0
+      },
+      {
+        "muscle": "Left Arm Front-Back",
+        "sign": 1.0,
+        "min": -100.0,
+        "max": 100.0
+      },
+      {
+        "muscle": "Left Arm Down-Up",
+        "sign": -1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "RightUpperArm": [
+      {
+        "muscle": "Right Arm Twist In-Out",
+        "sign": -1.0,
+        "min": -60.0,
+        "max": 100.0
+      },
+      {
+        "muscle": "Right Arm Front-Back",
+        "sign": 1.0,
+        "min": -100.0,
+        "max": 100.0
+      },
+      {
+        "muscle": "Right Arm Down-Up",
+        "sign": 1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "LeftLowerArm": [
+      {
+        "muscle": "Left Forearm Twist In-Out",
+        "sign": 1.0,
+        "min": -80.0,
+        "max": 80.0
+      },
+      null,
+      {
+        "muscle": "Left Forearm Stretch",
+        "sign": -1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "RightLowerArm": [
+      {
+        "muscle": "Right Forearm Twist In-Out",
+        "sign": -1.0,
+        "min": -80.0,
+        "max": 80.0
+      },
+      null,
+      {
+        "muscle": "Right Forearm Stretch",
+        "sign": 1.0,
+        "min": -90.0,
+        "max": 90.0
+      }
+    ],
+    "LeftHand": [
+      null,
+      {
+        "muscle": "Left Hand In-Out",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Left Hand Down-Up",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightHand": [
+      null,
+      {
+        "muscle": "Right Hand In-Out",
+        "sign": 1.0,
+        "min": -40.0,
+        "max": 40.0
+      },
+      {
+        "muscle": "Right Hand Down-Up",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftToes": [
+      null,
+      null,
+      {
+        "muscle": "Left Toes Up-Down",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightToes": [
+      null,
+      null,
+      {
+        "muscle": "Right Toes Up-Down",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftEye": [
+      null,
+      {
+        "muscle": "Left Eye In-Out",
+        "sign": 1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "Left Eye Down-Up",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightEye": [
+      null,
+      {
+        "muscle": "Right Eye In-Out",
+        "sign": -1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "Right Eye Down-Up",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "Jaw": [
+      null,
+      {
+        "muscle": "Jaw Left-Right",
+        "sign": 1.0,
+        "min": -10.0,
+        "max": 10.0
+      },
+      {
+        "muscle": "Jaw Close",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftThumbProximal": [
+      null,
+      {
+        "muscle": "LeftHand.Thumb.Spread",
+        "sign": -1.0,
+        "min": -25.0,
+        "max": 25.0
+      },
+      {
+        "muscle": "LeftHand.Thumb.1 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftThumbIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Thumb.2 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftThumbDistal": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Thumb.3 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftIndexProximal": [
+      null,
+      {
+        "muscle": "LeftHand.Index.Spread",
+        "sign": -1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "LeftHand.Index.1 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftIndexIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Index.2 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftIndexDistal": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Index.3 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftMiddleProximal": [
+      null,
+      {
+        "muscle": "LeftHand.Middle.Spread",
+        "sign": -1.0,
+        "min": -7.5,
+        "max": 7.5
+      },
+      {
+        "muscle": "LeftHand.Middle.1 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftMiddleIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Middle.2 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftMiddleDistal": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Middle.3 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftRingProximal": [
+      null,
+      {
+        "muscle": "LeftHand.Ring.Spread",
+        "sign": 1.0,
+        "min": -7.5,
+        "max": 7.5
+      },
+      {
+        "muscle": "LeftHand.Ring.1 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftRingIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Ring.2 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftRingDistal": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Ring.3 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftLittleProximal": [
+      null,
+      {
+        "muscle": "LeftHand.Little.Spread",
+        "sign": 1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "LeftHand.Little.1 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftLittleIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Little.2 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "LeftLittleDistal": [
+      null,
+      null,
+      {
+        "muscle": "LeftHand.Little.3 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightThumbProximal": [
+      null,
+      {
+        "muscle": "RightHand.Thumb.Spread",
+        "sign": -1.0,
+        "min": -25.0,
+        "max": 25.0
+      },
+      {
+        "muscle": "RightHand.Thumb.1 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightThumbIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Thumb.2 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightThumbDistal": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Thumb.3 Stretched",
+        "sign": -1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightIndexProximal": [
+      null,
+      {
+        "muscle": "RightHand.Index.Spread",
+        "sign": -1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "RightHand.Index.1 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightIndexIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Index.2 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightIndexDistal": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Index.3 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightMiddleProximal": [
+      null,
+      {
+        "muscle": "RightHand.Middle.Spread",
+        "sign": -1.0,
+        "min": -7.5,
+        "max": 7.5
+      },
+      {
+        "muscle": "RightHand.Middle.1 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightMiddleIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Middle.2 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightMiddleDistal": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Middle.3 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightRingProximal": [
+      null,
+      {
+        "muscle": "RightHand.Ring.Spread",
+        "sign": 1.0,
+        "min": -7.5,
+        "max": 7.5
+      },
+      {
+        "muscle": "RightHand.Ring.1 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightRingIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Ring.2 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightRingDistal": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Ring.3 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightLittleProximal": [
+      null,
+      {
+        "muscle": "RightHand.Little.Spread",
+        "sign": 1.0,
+        "min": -20.0,
+        "max": 20.0
+      },
+      {
+        "muscle": "RightHand.Little.1 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightLittleIntermediate": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Little.2 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ],
+    "RightLittleDistal": [
+      null,
+      null,
+      {
+        "muscle": "RightHand.Little.3 Stretched",
+        "sign": 1.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    ]
+  },
+  "axes": {
+    "Hips": {
+      "preQ": [
+        -0.4559346088863441,
+        -0.5404846273666408,
+        0.4559346088863441,
+        0.5404846273666408
+      ],
+      "postQ": [
+        -0.4559346088863441,
+        -0.5404846273666408,
+        0.4559346088863441,
+        0.5404846273666408
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -0.6981317007977318,
+        -0.6981317007977318,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.6981317007977318,
+        0.6981317007977318,
+        0.6981317007977318
+      ],
+      "length": 0.0936014423143652,
+      "type": 1
+    },
+    "LeftUpperLeg": {
+      "preQ": [
+        0.5998296343162532,
+        -0.35676875587970613,
+        0.6307102877381683,
+        -0.3393007479586705
+      ],
+      "postQ": [
+        0.4915505437561788,
+        -0.507876491117259,
+        0.5168567325682596,
+        -0.4830099902717215
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -1.0471975511965976,
+        -1.0471975511965976,
+        -1.5707963267948966
+      ],
+      "limitMax": [
+        1.0471975511965976,
+        1.0471975511965976,
+        0.8726646259971648
+      ],
+      "length": 0.40970854521922007,
+      "type": 1
+    },
+    "RightUpperLeg": {
+      "preQ": [
+        0.6307102634559816,
+        -0.3393007625673343,
+        0.5998296595425521,
+        -0.3567687425007659
+      ],
+      "postQ": [
+        0.5168567125771032,
+        -0.48301001091262946,
+        0.49155056434093336,
+        -0.5078764719085549
+      ],
+      "sign": [
+        -1.0,
+        -1.0,
+        1.0
+      ],
+      "limitMin": [
+        -1.0471975511965976,
+        -1.0471975511965976,
+        -1.5707963267948966
+      ],
+      "limitMax": [
+        1.0471975511965976,
+        1.0471975511965976,
+        0.8726646259971648
+      ],
+      "length": 0.40970856358589625,
+      "type": 1
+    },
+    "LeftLowerLeg": {
+      "preQ": [
+        -0.05133640807086454,
+        0.7094966440240185,
+        -0.05196510998963556,
+        0.7009127710841071
+      ],
+      "postQ": [
+        -0.48983454970221546,
+        0.5101324244066476,
+        -0.495833409631275,
+        0.5039605672872115
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        0.0,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        0.0,
+        1.3962634015954636
+      ],
+      "length": 0.42335828829634115,
+      "type": 1
+    },
+    "RightLowerLeg": {
+      "preQ": [
+        -0.051965109989635584,
+        0.7009127710841071,
+        -0.05133640807086452,
+        0.7094966440240186
+      ],
+      "postQ": [
+        -0.495833409631275,
+        0.5039605672872115,
+        -0.48983454970221546,
+        0.5101324244066476
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        0.0,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        0.0,
+        1.3962634015954636
+      ],
+      "length": 0.42335828829634115,
+      "type": 1
+    },
+    "LeftFoot": {
+      "preQ": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "postQ": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.5235987755982988,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.5235987755982988,
+        0.8726646259971648
+      ],
+      "length": 0.08584410000000003,
+      "type": 1
+    },
+    "RightFoot": {
+      "preQ": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "postQ": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "sign": [
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.5235987755982988,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.5235987755982988,
+        0.8726646259971648
+      ],
+      "length": 0.08584411000000008,
+      "type": 1
+    },
+    "Spine": {
+      "preQ": [
+        -0.46550130813865365,
+        -0.5322673502303163,
+        0.4655013081386536,
+        0.5322673502303163
+      ],
+      "postQ": [
+        -0.46550130813865365,
+        -0.5322673502303163,
+        0.4655013081386536,
+        0.5322673502303163
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -0.6981317007977318,
+        -0.6981317007977318,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.6981317007977318,
+        0.6981317007977318,
+        0.6981317007977318
+      ],
+      "length": 0.16400243877822476,
+      "type": 1
+    },
+    "Chest": {
+      "preQ": [
+        0.5329688939053031,
+        0.4646979213740446,
+        -0.5329688939053031,
+        -0.4646979213740446
+      ],
+      "postQ": [
+        0.5329688939053031,
+        0.4646979213740446,
+        -0.5329688939053031,
+        -0.4646979213740446
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -0.6981317007977318,
+        -0.6981317007977318,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.6981317007977318,
+        0.6981317007977318,
+        0.6981317007977318
+      ],
+      "length": 0.2379419595844857,
+      "type": 1
+    },
+    "Neck": {
+      "preQ": [
+        -0.4727842830193314,
+        -0.5258089213106761,
+        0.47278428301933134,
+        0.5258089213106761
+      ],
+      "postQ": [
+        -0.4727842830193314,
+        -0.5258089213106761,
+        0.47278428301933134,
+        0.5258089213106761
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -0.6981317007977318,
+        -0.6981317007977318,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.6981317007977318,
+        0.6981317007977318,
+        0.6981317007977318
+      ],
+      "length": 0.10695724460170401,
+      "type": 1
+    },
+    "Head": {
+      "preQ": [
+        -0.5,
+        -0.5,
+        0.5,
+        0.5
+      ],
+      "postQ": [
+        -0.5,
+        -0.5,
+        0.5,
+        0.5
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -0.6981317007977318,
+        -0.6981317007977318,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.6981317007977318,
+        0.6981317007977318,
+        0.6981317007977318
+      ],
+      "length": 0.10695724460170401,
+      "type": 1
+    },
+    "LeftShoulder": {
+      "preQ": [
+        -0.06101840838878025,
+        -0.0016795754682572303,
+        0.997757316354361,
+        -0.027463985968717804
+      ],
+      "postQ": [
+        -0.00067955062330393,
+        -0.003287137512604057,
+        0.9792872098571123,
+        0.20244824906181796
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.2617993877991494,
+        -0.2617993877991494
+      ],
+      "limitMax": [
+        0.0,
+        0.2617993877991494,
+        0.5235987755982988
+      ],
+      "length": 0.09103722920560316,
+      "type": 1
+    },
+    "RightShoulder": {
+      "preQ": [
+        0.0016791224629273318,
+        0.06101848115225084,
+        -0.027456551329820503,
+        0.9977575172829819
+      ],
+      "postQ": [
+        -0.20243739306233655,
+        -0.9792894571146528,
+        0.0032863287684172723,
+        0.0006790562861806783
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.2617993877991494,
+        -0.2617993877991494
+      ],
+      "limitMax": [
+        0.0,
+        0.2617993877991494,
+        0.5235987755982988
+      ],
+      "length": 0.09103717428481103,
+      "type": 1
+    },
+    "LeftUpperArm": {
+      "preQ": [
+        0.2707171505533505,
+        -0.0920687407548219,
+        0.9505200629327104,
+        -0.12143797319822111
+      ],
+      "postQ": [
+        2.710081914740134e-18,
+        -0.001261705351743046,
+        0.9999992040494861,
+        5.0306980803327406e-17
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        -1.7453292519943295,
+        -1.0471975511965976
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        1.7453292519943295,
+        1.7453292519943295
+      ],
+      "length": 0.2540493000000001,
+      "type": 1
+    },
+    "RightUpperArm": {
+      "preQ": [
+        0.12145239119113486,
+        -0.9505181726409607,
+        0.09206289117569888,
+        -0.27071930891906426
+      ],
+      "postQ": [
+        -0.0012609417690268162,
+        -0.03291155980904374,
+        -0.011796796764604371,
+        -0.9993878500576668
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        -1.7453292519943295,
+        -1.0471975511965976
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        1.7453292519943295,
+        1.7453292519943295
+      ],
+      "length": 0.2540493168363571,
+      "type": 1
+    },
+    "LeftLowerArm": {
+      "preQ": [
+        0.47439773324717477,
+        0.5328854220811344,
+        0.5300900621905345,
+        -0.45824059574658893
+      ],
+      "postQ": [
+        -1.309716224362489e-16,
+        0.7059820000137763,
+        0.7082297760307373,
+        -1.3357370765021412e-16
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        0.0,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        0.0,
+        1.3962634015954636
+      ],
+      "length": 0.24638927,
+      "type": 1
+    },
+    "RightLowerArm": {
+      "preQ": [
+        -0.5420148933641831,
+        -0.46297009805887573,
+        -0.43416280518102185,
+        0.5508005104138108
+      ],
+      "postQ": [
+        -0.7052544059746204,
+        -0.03902272340058109,
+        0.023175956951816047,
+        0.7075000529548776
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        -1.5707963267948966,
+        0.0,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        1.5707963267948966,
+        0.0,
+        1.3962634015954636
+      ],
+      "length": 0.24638875135395,
+      "type": 1
+    },
+    "LeftHand": {
+      "preQ": [
+        1.4124274395465458e-18,
+        -0.0017030756732811978,
+        0.999998549765574,
+        -1.8735013540549517e-16
+      ],
+      "postQ": [
+        3.6468903025843674e-05,
+        -0.001702685164096491,
+        0.99976925366059,
+        -0.02141352302162979
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.6981317007977318,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        0.0,
+        0.6981317007977318,
+        1.3962634015954636
+      ],
+      "length": 0.123194635,
+      "type": 1
+    },
+    "RightHand": {
+      "preQ": [
+        -0.0017013283017038687,
+        0.01120036262577279,
+        -0.04398238055496635,
+        -0.9989680713415116
+      ],
+      "postQ": [
+        -0.0014610970836879966,
+        0.011234226108238385,
+        -0.022580701810749577,
+        -0.9996808336988336
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.6981317007977318,
+        -1.3962634015954636
+      ],
+      "limitMax": [
+        0.0,
+        0.6981317007977318,
+        1.3962634015954636
+      ],
+      "length": 0.123194375676975,
+      "type": 1
+    },
+    "LeftToes": {
+      "preQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "postQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.8726646259971648
+      ],
+      "length": 0.08148398031175269,
+      "type": 1
+    },
+    "RightToes": {
+      "preQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "postQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.8726646259971648
+      ],
+      "length": 0.08148414986139942,
+      "type": 1
+    },
+    "LeftEye": {
+      "preQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "postQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.17453292519943295
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.2617993877991494
+      ],
+      "length": 1.0,
+      "type": 1
+    },
+    "RightEye": {
+      "preQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "postQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "sign": [
+        1.0,
+        -1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.17453292519943295
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.2617993877991494
+      ],
+      "length": 1.0,
+      "type": 1
+    },
+    "Jaw": {
+      "preQ": [
+        0.7042602795945133,
+        -0.0633834251635062,
+        0.7042602795945133,
+        -0.0633834251635062
+      ],
+      "postQ": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476,
+        0.0
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.17453292519943295,
+        -0.17453292519943295
+      ],
+      "limitMax": [
+        0.0,
+        0.17453292519943295,
+        0.17453292519943295
+      ],
+      "length": 1.0,
+      "type": 1
+    },
+    "LeftThumbProximal": {
+      "preQ": [
+        0.2594907220681478,
+        0.5948966232607886,
+        0.5452531756377955,
+        -0.530529497059647
+      ],
+      "postQ": [
+        0.2658094149575172,
+        0.5992026798499004,
+        0.6496992501784624,
+        -0.38495764403137117
+      ],
+      "sign": [
+        -1.0,
+        -1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.4363323129985824,
+        -0.3490658503988659
+      ],
+      "limitMax": [
+        0.0,
+        0.4363323129985824,
+        0.3490658503988659
+      ],
+      "length": 0.02911937967754948,
+      "type": 1
+    },
+    "LeftThumbIntermediate": {
+      "preQ": [
+        0.10426422729294585,
+        0.6630734958870258,
+        0.7020264563198896,
+        -0.2379524418578246
+      ],
+      "postQ": [
+        0.16526897129560641,
+        0.6236188013253402,
+        0.6985923586062196,
+        -0.30944219857258815
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.6108652381980153
+      ],
+      "length": 0.03377269739005159,
+      "type": 1
+    },
+    "LeftThumbDistal": {
+      "preQ": [
+        0.032049388530044444,
+        0.6640706633869566,
+        0.7267146292279896,
+        -0.17282603504589128
+      ],
+      "postQ": [
+        0.1652689384556557,
+        0.6236187289766099,
+        0.6985924230023997,
+        -0.3094422165364235
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.6108652381980153
+      ],
+      "length": 0.025329523042538694,
+      "type": 1
+    },
+    "LeftIndexProximal": {
+      "preQ": [
+        0.16582397506937208,
+        0.033801874732890876,
+        0.9386468357043669,
+        -0.30050284587489934
+      ],
+      "postQ": [
+        0.014890725737272795,
+        -0.002618019203498263,
+        0.9998854787545546,
+        0.0006645586827970194
+      ],
+      "sign": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.8726646259971648
+      ],
+      "length": 0.039814971810692115,
+      "type": 1
+    },
+    "LeftIndexIntermediate": {
+      "preQ": [
+        0.013509387236564181,
+        0.06323650052827283,
+        0.9359677661100015,
+        -0.3460967816384368
+      ],
+      "postQ": [
+        -9.252123241311321e-07,
+        0.005689380064115796,
+        0.9999838153458378,
+        -1.0702898198267087e-07
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.027968477000048488,
+      "type": 1
+    },
+    "LeftIndexDistal": {
+      "preQ": [
+        0.0017455753875995918,
+        0.06845552000505543,
+        0.9492545117489455,
+        -0.3069636243460687
+      ],
+      "postQ": [
+        -1.0061415257328886e-06,
+        0.005689384884765358,
+        0.9999838153183324,
+        -1.0987504332413134e-07
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.020976357750036367,
+      "type": 1
+    },
+    "LeftMiddleProximal": {
+      "preQ": [
+        0.0648415468372852,
+        0.011938649069069175,
+        0.9494964580938393,
+        -0.3067727473707663
+      ],
+      "postQ": [
+        -0.004803400594228453,
+        -0.0017881714765628758,
+        0.9999868637669688,
+        4.559609311699346e-05
+      ],
+      "sign": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.1308996938995747,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.1308996938995747,
+        0.8726646259971648
+      ],
+      "length": 0.04428247561289253,
+      "type": 1
+    },
+    "LeftMiddleIntermediate": {
+      "preQ": [
+        -0.018485992058056865,
+        0.0188416968467887,
+        0.9368982671015145,
+        -0.3486042106167715
+      ],
+      "postQ": [
+        5.546379232976739e-08,
+        -0.000914516330966651,
+        0.9999995818298352,
+        -1.7951641719318737e-07
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.03396482800000242,
+      "type": 1
+    },
+    "LeftMiddleDistal": {
+      "preQ": [
+        -0.0002863124434845462,
+        0.011572212772583846,
+        0.9496395729950577,
+        -0.31313045734724526
+      ],
+      "postQ": [
+        5.750137036562556e-08,
+        -0.0009145159702397827,
+        0.9999995818301627,
+        -1.9182360091671294e-07
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.025473621000001813,
+      "type": 1
+    },
+    "LeftRingProximal": {
+      "preQ": [
+        -0.052334375672369426,
+        -0.004290102355503582,
+        0.9489916121888979,
+        -0.3108980992863722
+      ],
+      "postQ": [
+        -0.02588233594024802,
+        -0.001700507019493949,
+        0.999663509015745,
+        -0.0002858399560707031
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.1308996938995747,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.1308996938995747,
+        0.8726646259971648
+      ],
+      "length": 0.043193334082349634,
+      "type": 1
+    },
+    "LeftRingIntermediate": {
+      "preQ": [
+        -0.022092350780259683,
+        0.0024315201963033446,
+        0.9357114906812292,
+        -0.35206536602405075
+      ],
+      "postQ": [
+        -2.67441346520883e-07,
+        -0.0024383611522978592,
+        0.999997027192991,
+        5.981425077461467e-10
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.030835563000004434,
+      "type": 1
+    },
+    "LeftRingDistal": {
+      "preQ": [
+        -0.0007643305743890792,
+        -0.005929200532997891,
+        0.9496170145816236,
+        -0.31335568607717457
+      ],
+      "postQ": [
+        -2.8701629945549023e-07,
+        -0.0024383577560592846,
+        0.9999970272012663,
+        -3.429425292356126e-08
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.023126672250003324,
+      "type": 1
+    },
+    "LeftLittleProximal": {
+      "preQ": [
+        -0.08757824524194092,
+        -0.00506585970954567,
+        0.9476324167447785,
+        -0.307078476549881
+      ],
+      "postQ": [
+        -0.023482895578051822,
+        -0.002352667688393998,
+        0.9997213159005024,
+        -0.0005559713895920518
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.8726646259971648
+      ],
+      "length": 0.030839477702195,
+      "type": 1
+    },
+    "LeftLittleIntermediate": {
+      "preQ": [
+        -0.00994272960967417,
+        0.005723779813029522,
+        0.9512097160567806,
+        -0.30833173134100156
+      ],
+      "postQ": [
+        7.675143949711507e-07,
+        -0.0026664117204503045,
+        0.9999964354850965,
+        -0.00013879859257806378
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.023064027888686476,
+      "type": 1
+    },
+    "LeftLittleDistal": {
+      "preQ": [
+        -0.0008354579727179037,
+        0.0025289098498860697,
+        0.949595268888847,
+        -0.3134672740955027
+      ],
+      "postQ": [
+        8.032605973521169e-07,
+        -0.002666412071900752,
+        0.9999964354839064,
+        -0.00013880021338745152
+      ],
+      "sign": [
+        -1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.017298020916514858,
+      "type": 1
+    },
+    "RightThumbProximal": {
+      "preQ": [
+        -0.5771656973117778,
+        -0.2917032107834206,
+        -0.5125656317727155,
+        0.564858803410808
+      ],
+      "postQ": [
+        0.5993897066230708,
+        0.26569825573029365,
+        0.38503387904657044,
+        -0.6495270036592317
+      ],
+      "sign": [
+        1.0,
+        -1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.4363323129985824,
+        -0.3490658503988659
+      ],
+      "limitMax": [
+        0.0,
+        0.4363323129985824,
+        0.3490658503988659
+      ],
+      "length": 0.02911934014790857,
+      "type": 1
+    },
+    "RightThumbIntermediate": {
+      "preQ": [
+        -0.6632425471938804,
+        -0.10411635789537771,
+        -0.2380540797642323,
+        0.7018542318159656
+      ],
+      "postQ": [
+        0.6238221647114492,
+        0.16517887256438613,
+        0.30949030225340324,
+        -0.6984107671593965
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.6108652381980153
+      ],
+      "length": 0.033772697390051655,
+      "type": 1
+    },
+    "RightThumbDistal": {
+      "preQ": [
+        -0.6642538973661859,
+        -0.03191807902662639,
+        -0.17290843528283534,
+        0.7265333227547957
+      ],
+      "postQ": [
+        0.6238221377304574,
+        0.1651788604496351,
+        0.30949030881673784,
+        -0.6984107912156589
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.6981317007977318
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.6108652381980153
+      ],
+      "length": 0.025329523042538743,
+      "type": 1
+    },
+    "RightIndexProximal": {
+      "preQ": [
+        -0.02354863424387989,
+        -0.17787023157880258,
+        -0.25931228111896903,
+        0.948980918356227
+      ],
+      "postQ": [
+        -0.002110610930236997,
+        0.18580510081755128,
+        -0.009679900122467758,
+        -0.9825366707483746
+      ],
+      "sign": [
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.8726646259971648
+      ],
+      "length": 0.03981496830479132,
+      "type": 1
+    },
+    "RightIndexIntermediate": {
+      "preQ": [
+        -0.0033898254757222883,
+        -0.1741972541824562,
+        -0.34377162964884456,
+        0.9227485531644656
+      ],
+      "postQ": [
+        0.006028000795087488,
+        0.20131329495559808,
+        0.09229381298100553,
+        -0.9751504871382478
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.02796847652631199,
+      "type": 1
+    },
+    "RightIndexDistal": {
+      "preQ": [
+        -0.0053984116253354775,
+        -0.18720528054749688,
+        -0.3996788626654397,
+        0.8973192557977997
+      ],
+      "postQ": [
+        0.00602800057733684,
+        0.20131334274004428,
+        0.09229383467626623,
+        -0.9751504752214497
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.020976357394733993,
+      "type": 1
+    },
+    "RightMiddleProximal": {
+      "preQ": [
+        -0.006080289401333333,
+        -0.07615447760591916,
+        -0.26483791664488354,
+        0.9612618808257006
+      ],
+      "postQ": [
+        -0.0012863169069795492,
+        0.07307631763049294,
+        -0.002292744246232648,
+        -0.997322886789531
+      ],
+      "sign": [
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.1308996938995747,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.1308996938995747,
+        0.8726646259971648
+      ],
+      "length": 0.044282479564245206,
+      "type": 1
+    },
+    "RightMiddleIntermediate": {
+      "preQ": [
+        0.007874510274804819,
+        -0.05470042967057173,
+        -0.34702988548401165,
+        0.9362243927941316
+      ],
+      "postQ": [
+        -0.0004291137788636902,
+        0.02508974891350724,
+        0.11183437137409329,
+        -0.993409982706125
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.03396482249102631,
+      "type": 1
+    },
+    "RightMiddleDistal": {
+      "preQ": [
+        -0.004079145300455087,
+        -0.02230204423433634,
+        -0.4175803655008133,
+        0.9083570981419117
+      ],
+      "postQ": [
+        -0.00042911299017168005,
+        0.025089749752966205,
+        0.11183440803450101,
+        -0.9934099785581723
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.02547361686826973,
+      "type": 1
+    },
+    "RightRingProximal": {
+      "preQ": [
+        0.005026487829265675,
+        0.04162095177674548,
+        -0.2688152459165403,
+        0.9622789586996746
+      ],
+      "postQ": [
+        -0.001615720535889324,
+        -0.05732839377637035,
+        0.01604233131183614,
+        -0.9982251691478494
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.1308996938995747,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.1308996938995747,
+        0.8726646259971648
+      ],
+      "length": 0.04319333078730309,
+      "type": 1
+    },
+    "RightRingIntermediate": {
+      "preQ": [
+        -0.013614590214340215,
+        0.05145858822262293,
+        -0.36647033178849314,
+        0.9289058900396002
+      ],
+      "postQ": [
+        -0.001935215879248138,
+        -0.07552780173524692,
+        0.1262617084973854,
+        -0.9891156590974906
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.03083556618521741,
+      "type": 1
+    },
+    "RightRingDistal": {
+      "preQ": [
+        -0.01823545746566673,
+        0.07187100804598848,
+        -0.43012187539608837,
+        0.8997206225263612
+      ],
+      "postQ": [
+        -0.0019352111894163173,
+        -0.07552780339503988,
+        0.12626169532097137,
+        -0.98911566066191
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.023126674638913058,
+      "type": 1
+    },
+    "RightLittleProximal": {
+      "preQ": [
+        0.004208628727698271,
+        0.0768772625428728,
+        -0.2650721147654933,
+        0.9611498051406429
+      ],
+      "postQ": [
+        -0.002283130718883845,
+        -0.1920313358554564,
+        0.02353501055865016,
+        -0.9811038969659094
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        -0.3490658503988659,
+        -0.8726646259971648
+      ],
+      "limitMax": [
+        0.0,
+        0.3490658503988659,
+        0.8726646259971648
+      ],
+      "length": 0.030839479131750374,
+      "type": 1
+    },
+    "RightLittleIntermediate": {
+      "preQ": [
+        -0.05798053538636597,
+        0.17052282466279806,
+        -0.32434831104855183,
+        0.9286325413775263
+      ],
+      "postQ": [
+        -0.002118275066234171,
+        -0.18796919164911766,
+        0.012623640173478192,
+        -0.9820915128491293
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.02306402639221634,
+      "type": 1
+    },
+    "RightLittleDistal": {
+      "preQ": [
+        -0.06186659728616831,
+        0.17922868178794737,
+        -0.3187595383599282,
+        0.9286775330917354
+      ],
+      "postQ": [
+        -0.0021182736514141127,
+        -0.18796919539075385,
+        0.01262363793788043,
+        -0.9820915121647799
+      ],
+      "sign": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "limitMin": [
+        0.0,
+        0.0,
+        -0.7853981633974483
+      ],
+      "limitMax": [
+        0.0,
+        0.0,
+        0.7853981633974483
+      ],
+      "length": 0.017298019794162255,
+      "type": 1
+    }
+  },
+  "limitsOverride": {
+    "Left Upper Leg Twist In-Out": [
+      -90.0,
+      50.0
+    ],
+    "Left Upper Leg In-Out": [
+      -60.0,
+      60.0
+    ],
+    "Left Upper Leg Front-Back": [
+      -60.0,
+      60.0
+    ],
+    "Right Upper Leg Twist In-Out": [
+      -90.0,
+      50.0
+    ],
+    "Right Upper Leg In-Out": [
+      -60.0,
+      60.0
+    ],
+    "Right Upper Leg Front-Back": [
+      -60.0,
+      60.0
+    ],
+    "Left Lower Leg Twist In-Out": [
+      -80.0,
+      80.0
+    ],
+    "Left Lower Leg Stretch": [
+      -90.0,
+      90.0
+    ],
+    "Right Lower Leg Twist In-Out": [
+      -80.0,
+      80.0
+    ],
+    "Right Lower Leg Stretch": [
+      -90.0,
+      90.0
+    ],
+    "Left Foot Twist In-Out": [
+      -30.0,
+      30.0
+    ],
+    "Left Foot Up-Down": [
+      0.0,
+      0.0
+    ],
+    "Right Foot Twist In-Out": [
+      -30.0,
+      30.0
+    ],
+    "Right Foot Up-Down": [
+      0.0,
+      0.0
+    ],
+    "Spine Twist Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Spine Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Spine Front-Back": [
+      -40.0,
+      40.0
+    ],
+    "Chest Twist Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Chest Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Chest Front-Back": [
+      -40.0,
+      40.0
+    ],
+    "Neck Turn Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Neck Tilt Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Neck Nod Down-Up": [
+      -40.0,
+      40.0
+    ],
+    "Head Turn Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Head Tilt Left-Right": [
+      -40.0,
+      40.0
+    ],
+    "Head Nod Down-Up": [
+      -40.0,
+      40.0
+    ],
+    "Left Shoulder Front-Back": [
+      -15.0,
+      15.0
+    ],
+    "Left Shoulder Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Right Shoulder Front-Back": [
+      -15.0,
+      15.0
+    ],
+    "Right Shoulder Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Left Arm Twist In-Out": [
+      -60.0,
+      100.0
+    ],
+    "Left Arm Front-Back": [
+      -100.0,
+      100.0
+    ],
+    "Left Arm Down-Up": [
+      -90.0,
+      90.0
+    ],
+    "Right Arm Twist In-Out": [
+      -60.0,
+      100.0
+    ],
+    "Right Arm Front-Back": [
+      -100.0,
+      100.0
+    ],
+    "Right Arm Down-Up": [
+      -90.0,
+      90.0
+    ],
+    "Left Forearm Twist In-Out": [
+      -80.0,
+      80.0
+    ],
+    "Left Forearm Stretch": [
+      -90.0,
+      90.0
+    ],
+    "Right Forearm Twist In-Out": [
+      -80.0,
+      80.0
+    ],
+    "Right Forearm Stretch": [
+      -90.0,
+      90.0
+    ],
+    "Left Hand In-Out": [
+      -40.0,
+      40.0
+    ],
+    "Left Hand Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Right Hand In-Out": [
+      -40.0,
+      40.0
+    ],
+    "Right Hand Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Left Toes Up-Down": [
+      0.0,
+      0.0
+    ],
+    "Right Toes Up-Down": [
+      0.0,
+      0.0
+    ],
+    "Left Eye In-Out": [
+      -20.0,
+      20.0
+    ],
+    "Left Eye Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Right Eye In-Out": [
+      -20.0,
+      20.0
+    ],
+    "Right Eye Down-Up": [
+      0.0,
+      0.0
+    ],
+    "Jaw Left-Right": [
+      -10.0,
+      10.0
+    ],
+    "Jaw Close": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Thumb.Spread": [
+      -25.0,
+      25.0
+    ],
+    "LeftHand.Thumb.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Thumb.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Thumb.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Index.Spread": [
+      -20.0,
+      20.0
+    ],
+    "LeftHand.Index.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Index.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Index.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Middle.Spread": [
+      -7.5,
+      7.5
+    ],
+    "LeftHand.Middle.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Middle.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Middle.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Ring.Spread": [
+      -7.5,
+      7.5
+    ],
+    "LeftHand.Ring.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Ring.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Ring.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Little.Spread": [
+      -20.0,
+      20.0
+    ],
+    "LeftHand.Little.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Little.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "LeftHand.Little.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Thumb.Spread": [
+      -25.0,
+      25.0
+    ],
+    "RightHand.Thumb.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Thumb.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Thumb.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Index.Spread": [
+      -20.0,
+      20.0
+    ],
+    "RightHand.Index.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Index.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Index.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Middle.Spread": [
+      -7.5,
+      7.5
+    ],
+    "RightHand.Middle.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Middle.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Middle.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Ring.Spread": [
+      -7.5,
+      7.5
+    ],
+    "RightHand.Ring.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Ring.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Ring.3 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Little.Spread": [
+      -20.0,
+      20.0
+    ],
+    "RightHand.Little.1 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Little.2 Stretched": [
+      0.0,
+      0.0
+    ],
+    "RightHand.Little.3 Stretched": [
+      0.0,
+      0.0
+    ]
+  }
+}

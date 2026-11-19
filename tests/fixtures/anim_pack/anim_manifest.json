@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skeleton": "simple_rig.skeleton.json",
+  "coordinate": "mirrored",
+  "clips": [
+    {
+      "name": "Walk",
+      "action": "WalkAction",
+      "file": "Walk.ab",
+      "loop": true,
+      "fade": 0.15,
+      "speed": 1.25,
+      "normalizedStartTime": 0.2,
+      "rootBone": "Hips",
+      "events": [
+        {"normalizedTime": 0.1, "name": "Footstep.Left"},
+        {"normalizedTime": 0.6, "name": "Footstep.Right"}
+      ]
+    }
+  ]
+}

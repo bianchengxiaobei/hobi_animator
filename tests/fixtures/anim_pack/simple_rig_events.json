@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "fps": 24,
+  "markerSource": "pose",
+  "actions": {
+    "Walk": {
+      "frameStart": 0,
+      "frameEnd": 24,
+      "events": [
+        {
+          "frame": 0,
+          "normalizedTime": 0.0,
+          "name": "Footstep.Left"
+        },
+        {
+          "frame": 12,
+          "normalizedTime": 0.5,
+          "name": "Footstep.Right"
+        }
+      ]
+    },
+    "Wave": {
+      "frameStart": 0,
+      "frameEnd": 24,
+      "events": [
+        {
+          "frame": 6,
+          "normalizedTime": 0.25,
+          "name": "Wave.Start"
+        }
+      ]
+    }
+  }
+}
