@@ -74,6 +74,8 @@ add_custom_target(anim_bgfx_shaders DEPENDS
 add_executable(bgfx_demo
     main.cpp
     FbxLoader.cpp
+    Input.cpp
+    SkeletonDebug.cpp
 )
 
 add_executable(humanoid_retarget_demo
@@ -109,6 +111,14 @@ target_compile_definitions(humanoid_retarget_demo PRIVATE
 if(MSVC)
     target_compile_options(bgfx_demo PRIVATE /Zc:preprocessor)
     target_compile_options(humanoid_retarget_demo PRIVATE /Zc:preprocessor)
+endif()
+
+if(ANIM_BUILD_DEBUG_TOOLS)
+    target_sources(bgfx_demo PRIVATE DebugOverlay.cpp)
+    target_link_libraries(bgfx_demo PRIVATE anim::debug)
+    target_compile_definitions(bgfx_demo PRIVATE ANIM_DEBUG_TOOLS=1)
+else()
+    target_compile_definitions(bgfx_demo PRIVATE ANIM_DEBUG_TOOLS=0)
 endif()
 
 target_link_libraries(bgfx_demo PRIVATE

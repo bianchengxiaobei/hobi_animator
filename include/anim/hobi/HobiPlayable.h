@@ -22,7 +22,8 @@ class HobiLayer;
 class HobiState;
 struct Clip;
 struct HumanoidAvatar;
-class IAnimationJob;
+struct IAnimationJob;
+class IEventObserver;
 class IJobScheduler;
 class IRootMotionTarget;
 class ITransition;
@@ -83,6 +84,9 @@ public:
     bool isGraphPlaying() const noexcept { return _graphPlaying; }
     void pauseGraph();
     void unpauseGraph();
+
+    void setEventObserver(IEventObserver* observer) noexcept;
+    IEventObserver* eventObserver() const noexcept { return _eventObserver; }
 
     // ---- 更新 ----
     void evaluate(float deltaTime);
@@ -168,6 +172,7 @@ private:
     float _speed = 1.0f;
     bool _graphPlaying = true;
     bool _runningPostUpdate = false;
+    IEventObserver* _eventObserver = nullptr;
 };
 
 }  // namespace anim

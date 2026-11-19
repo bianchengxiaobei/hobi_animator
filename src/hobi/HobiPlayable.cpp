@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
+#include "anim/hobi/EventDispatcher.h"
 #include "anim/hobi/HobiLayer.h"
 #include "anim/hobi/HobiState.h"
 #include "anim/hobi/LayerList.h"
@@ -52,6 +53,7 @@ void HobiPlayable::destroyGraph() {
     if (_layers) _layers->setCount(0);
     _layers.reset();
     _states.reset();
+    _eventObserver = nullptr;
     _preUpdatables.clear();
     _postUpdatables.clear();
     _ownedPreUpdatables.clear();
@@ -143,6 +145,17 @@ void HobiPlayable::setSpeed(float value) {
     ANIM_CHECK_MSG(std::isfinite(value), "speed must be finite");
     _speed = value;
     if (_rootNode) _rootNode->setSpeed(value);
+}
+
+void HobiPlayable::setEventObserver(IEventObserver* observer) noexcept {
+    _eventObserver = observer;
+    if (!_states) return;
+
+    for (HobiState* state : _states->states()) {
+        if (state != nullptr && state->dispatcher() != nullptr) {
+            state->dispatcher()->setObserver(observer);
+        }
+    }
 }
 
 void HobiPlayable::pauseGraph() {

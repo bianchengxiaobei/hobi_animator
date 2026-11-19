@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include "anim/hobi/Event.h"
+#include "anim/hobi/EventObserver.h"
 #include "anim/core/IUpdatable.h"
 
 // 事件派发器（对应 HobiState.EventDispatcher）。
@@ -23,6 +24,9 @@ public:
     void setEvents(EventSequence* events);
     EventSequence* events() const noexcept { return _events; }
 
+    void setObserver(IEventObserver* observer) noexcept { _observer = observer; }
+    IEventObserver* observer() const noexcept { return _observer; }
+
     void onTimeChanged();
     void release();
     bool released() const noexcept { return _released; }
@@ -32,6 +36,8 @@ public:
 private:
     static constexpr int kRecalculateIndex = INT32_MIN;
 
+    void notify(const HobiEvent& event, EventKind kind, int eventIndex,
+                bool playingForwards) const;
     void updateZeroLength();
     void checkGeneralEvents(float currentTime);
     void validateNextEventIndex(float& currentTime, float& playDirectionFloat,
@@ -44,6 +50,7 @@ private:
 
     HobiState* _state = nullptr;
     EventSequence* _events = nullptr;
+    IEventObserver* _observer = nullptr;
 
     float _previousTime = 0.0f;
     int _nextEventIndex = kRecalculateIndex;

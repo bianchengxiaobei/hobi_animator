@@ -14,9 +14,12 @@ namespace anim {
 HobiState::HobiState(HobiPlayable* root) {
     setRoot(root);
     _dispatcher = std::make_unique<EventDispatcher>(*this);
+    if (root != nullptr) _dispatcher->setObserver(root->eventObserver());
 }
 
-HobiState::~HobiState() = default;
+HobiState::~HobiState() {
+    if (_dispatcher != nullptr) _dispatcher->setObserver(nullptr);
+}
 
 HobiLayer* HobiState::layer() const noexcept {
     return dynamic_cast<HobiLayer*>(parent());
@@ -156,6 +159,7 @@ void HobiState::setRemainingDuration(float value) {
 void HobiState::setEvents(EventSequence* events) {
     _events = events;
     if (_dispatcher == nullptr) _dispatcher = std::make_unique<EventDispatcher>(*this);
+    if (root() != nullptr) _dispatcher->setObserver(root()->eventObserver());
     _dispatcher->setEvents(events);
     if (events != nullptr && root() != nullptr) root()->requirePostUpdate(_dispatcher.get());
 }

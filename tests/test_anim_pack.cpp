@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iterator>
+#include <limits>
 #include <memory>
 #include <string>
 #include <vector>
@@ -14,7 +15,9 @@
 #include "ClipBuilder.h"
 #include "EventSidecar.h"
 #include "GltfImporter.h"
+#include "JsonWriter.h"
 #include "SkeletonLoader.h"
+#include "Validator.h"
 #include "anim/hobi/HobiAnimator.h"
 #include "anim/hobi/HobiPlayable.h"
 #include "anim/hobi/HobiState.h"
@@ -22,6 +25,7 @@
 #include "anim/clip/ClipIO.h"
 #include "anim/integration/AnimationManifest.h"
 #include "anim/integration/Coordinate.h"
+#include "anim/integration/JsonWriter.h"
 #include "anim/skeleton/Pose.h"
 
 using namespace anim;
@@ -557,4 +561,33 @@ TEST(AnimPack, ProducesStableBytes) {
         ASSERT_EQ(a.size(), b.size()) << name;
         EXPECT_EQ(a, b) << name;
     }
+}
+
+TEST(AnimPack, JsonWriterDelegatesToCore) {
+    const std::string text = "a\"b\\c\n中";
+    EXPECT_EQ(pack::jsonEscape(text), json::escape(text));
+    EXPECT_EQ(pack::jsonEscape(text), "a\\\"b\\\\c\\n中");
+    EXPECT_EQ(pack::jsonNumber(1.25f), json::number(1.25f));
+    EXPECT_EQ(pack::jsonNumber(std::numeric_limits<float>::quiet_NaN()), "0");
+}
+
+TEST(AnimPack, PackedAssetsPassSanityValidation) {
+    TempDir temp;
+    pack::PackResult result;
+    std::vector<std::string> warnings;
+    std::string error;
+    ASSERT_TRUE(pack::packAnimations(makeOptions(temp), result, warnings, error)) << error;
+
+    converter::SkeletonAsset skeleton;
+    ASSERT_TRUE(converter::loadSkeletonFile(
+        (temp.path() / "simple_rig.skeleton.json").string(), skeleton, error))
+        << error;
+
+    validate::ClipValidationOptions options;
+    options.file = "Walk.ab";
+    options.clipName = "Walk";
+    options.skeleton = &skeleton.skeleton;
+    validate::Report report;
+    validate::validateClipBytes(readBytes(temp.path() / "Walk.ab"), options, report);
+    EXPECT_FALSE(report.hasErrors());
 }

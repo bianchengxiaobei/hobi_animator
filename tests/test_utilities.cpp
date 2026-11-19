@@ -234,6 +234,31 @@ TEST(ExitEvent, UnregisterPreventsCallback) {
     EXPECT_FALSE(ExitEvent::unregister(*state));
 }
 
+TEST(HobiLayer, DestroyNonLastStateKeepsMovedStateConnected) {
+    Skeleton skeleton = makeSkeleton();
+    HobiPlayable root;
+    root.createOutput(skeleton);
+
+    const BoneLocalClip clipA = makeClip(1.0f);
+    const BoneLocalClip clipB = makeClip(1.0f);
+    HobiState* stateA = root.play(clipA);
+    HobiState* stateB = root.play(clipB);
+    ASSERT_NE(stateA, nullptr);
+    ASSERT_NE(stateB, nullptr);
+
+    HobiLayer* layer = root.layers().getLayer(0);
+    ASSERT_NE(layer, nullptr);
+    EXPECT_EQ(layer->childCount(), 2);
+
+    stateA->destroy();
+    EXPECT_EQ(layer->childCount(), 1);
+    EXPECT_EQ(layer->getChild(0), stateB);
+
+    root.evaluate(0.1f);
+    EXPECT_NEAR(stateB->timeD(), 0.1, 1e-6);
+    EXPECT_NEAR(stateB->weight(), 1.0f, 1e-6);
+}
+
 TEST(ExitEvent, DestroyedNodeCancelsPendingEvent) {
     Skeleton skeleton = makeSkeleton();
     HobiPlayable root;

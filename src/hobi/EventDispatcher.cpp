@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+#include "anim/hobi/HobiPlayable.h"
 #include "anim/hobi/HobiState.h"
 #include "anim/core/Assert.h"
 
@@ -17,6 +18,12 @@ float wrap01(float value) {
 }  // namespace
 
 EventDispatcher::EventDispatcher(HobiState& state) : _state(&state) {}
+
+void EventDispatcher::notify(const HobiEvent& event, EventKind kind, int eventIndex,
+                             bool playingForwards) const {
+    if (_observer == nullptr || _state == nullptr) return;
+    _observer->onEventDispatched(*_state, event, kind, eventIndex, playingForwards);
+}
 
 void EventDispatcher::setEvents(EventSequence* events) {
     _events = events;
@@ -39,6 +46,9 @@ void EventDispatcher::release() {
 
 void EventDispatcher::update(bool& needsMoreUpdates) {
     needsMoreUpdates = false;
+    if (_state != nullptr && _state->root() != nullptr) {
+        _observer = _state->root()->eventObserver();
+    }
 
     if (_events == nullptr || _events->isEmpty()) return;
 
@@ -62,10 +72,16 @@ void EventDispatcher::update(bool& needsMoreUpdates) {
     if (endEvent.hasCallback()) {
         if (currentTime > _previousTime) {
             const float eventTime = std::isnan(endEvent.normalizedTime) ? 1.0f : endEvent.normalizedTime;
-            if (currentTime > eventTime) endEvent.invoke();
+            if (currentTime > eventTime) {
+                notify(endEvent, EventKind::End, -1, true);
+                endEvent.invoke();
+            }
         } else {
             const float eventTime = std::isnan(endEvent.normalizedTime) ? 0.0f : endEvent.normalizedTime;
-            if (currentTime < eventTime) endEvent.invoke();
+            if (currentTime < eventTime) {
+                notify(endEvent, EventKind::End, -1, false);
+                endEvent.invoke();
+            }
         }
     }
 
@@ -98,7 +114,13 @@ void EventDispatcher::updateZeroLength() {
         if (!invokeAllEvents(1, playDirectionInt)) return;
     }
 
-    if (_events != nullptr) _events->endEvent().invoke();
+    if (_events != nullptr) {
+        const HobiEvent& endEvent = _events->endEvent();
+        if (endEvent.hasCallback()) {
+            notify(endEvent, EventKind::End, -1, speed > 0.0f);
+            endEvent.invoke();
+        }
+    }
 }
 
 void EventDispatcher::checkGeneralEvents(float currentTime) {
@@ -126,7 +148,9 @@ void EventDispatcher::checkGeneralEvents(float currentTime) {
 
         while (true) {
             if (_events == nullptr) return;
-            _events->at(_nextEventIndex).invoke();
+            const HobiEvent& hobiEvent = _events->at(_nextEventIndex);
+            notify(hobiEvent, EventKind::Normal, _nextEventIndex, playDirectionInt > 0);
+            hobiEvent.invoke();
 
             if (!nextEventLooped(playDirectionInt) || _nextEventIndex == loopStartIndex) return;
             if (_events == nullptr) return;
@@ -142,6 +166,7 @@ void EventDispatcher::checkGeneralEvents(float currentTime) {
 
             if (currentTime <= eventTime) return;
 
+            notify(hobiEvent, EventKind::Normal, _nextEventIndex, playDirectionInt > 0);
             hobiEvent.invoke();
 
             if (!nextEvent(playDirectionInt)) return;
@@ -227,7 +252,9 @@ bool EventDispatcher::invokeAllEvents(int count, int playDirectionInt) {
     while (count-- > 0) {
         do {
             if (_events == nullptr) return false;
-            _events->at(_nextEventIndex).invoke();
+            const HobiEvent& hobiEvent = _events->at(_nextEventIndex);
+            notify(hobiEvent, EventKind::Normal, _nextEventIndex, playDirectionInt > 0);
+            hobiEvent.invoke();
 
             if (!nextEventLooped(playDirectionInt)) return false;
         } while (_nextEventIndex != loopStartIndex);

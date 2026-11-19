@@ -50,12 +50,15 @@ void HobiLayer::removeChild(HobiState* state) {
     if (it == _states.end()) return;
 
     const std::ptrdiff_t index = it - _states.begin();
+    state->disconnectFromGraph();
     state->setParent(nullptr);
     state->setIndex(-1);
 
     // 对齐原项目：用最后一个填充空位，避免整体搬移。
+    HobiState* moved = nullptr;
     if (index != static_cast<std::ptrdiff_t>(_states.size()) - 1) {
-        HobiState* moved = _states.back();
+        moved = _states.back();
+        moved->disconnectFromGraph();
         _states[static_cast<std::size_t>(index)] = moved;
         moved->setIndex(static_cast<int>(index));
     }
@@ -63,6 +66,11 @@ void HobiLayer::removeChild(HobiState* state) {
 
     if (_currentState == state) _currentState = nullptr;
     if (graph() != nullptr) graph()->setInputCount(_mixerNode, childCount());
+    if (moved != nullptr &&
+        (moved->weight() > 0.0f || moved->targetWeight() > 0.0f)) {
+        moved->connectToGraph();
+        moved->setWeightDirty();
+    }
 }
 
 void HobiLayer::destroyStates() {

@@ -94,6 +94,7 @@ add_library(anim STATIC
     src/jobs/SimpleLean.cpp
     src/jobs/ThreadPoolJobScheduler.cpp
     src/integration/Json.cpp
+    src/integration/JsonWriter.cpp
     src/integration/AnimationManifest.cpp
     src/integration/AnimationClipLibrary.cpp
     src/integration/AnimationTransitions.cpp
@@ -130,6 +131,16 @@ target_include_directories(anim PUBLIC
 )
 target_link_libraries(anim PUBLIC anim::glm)
 
+option(ANIM_BUILD_DEBUG_TOOLS "Build runtime debug snapshot/recorder" ON)
+if(ANIM_BUILD_DEBUG_TOOLS)
+    add_library(anim_debug STATIC
+        src/debug/Snapshot.cpp
+        src/debug/Recorder.cpp
+    )
+    add_library(anim::debug ALIAS anim_debug)
+    target_link_libraries(anim_debug PUBLIC anim::anim)
+endif()
+
 # ---------------------------------------------------------------------------
 # Offline converter (P6). The core is a library so tests can link it directly.
 # ---------------------------------------------------------------------------
@@ -147,6 +158,8 @@ add_library(anim_converter_core STATIC
 target_include_directories(anim_converter_core PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/tools/anim_converter")
 target_link_libraries(anim_converter_core PUBLIC anim::anim)
+
+add_subdirectory(tools/anim_validate)
 
 if(ANIM_BUILD_TOOLS)
     add_executable(anim_converter tools/anim_converter/main.cpp)
