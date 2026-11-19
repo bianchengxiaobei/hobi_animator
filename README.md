@@ -1,8 +1,6 @@
 # hobi_animator
 
-> Unity **Animancer Pro v7.4.2** 的 C++ 重实现（项目内部代号 `AnimancerCpp`）。
-
-一个引擎无关的 C++20 动画运行时：实现 Animancer 的**播放、过渡、混合、状态机、根运动、人形重定向、Animation Jobs/IK** 等运行时能力，只产出 **Pose / 骨骼矩阵调色板**，不绑定渲染、物理或 ECS。
+一个引擎无关的 C++20 骨骼动画运行时：提供**播放、过渡、混合、状态机、根运动、人形重定向、Animation Jobs/IK** 等能力，只产出 **Pose / 骨骼矩阵调色板**，不绑定渲染、物理或 ECS。
 
 - 核心库 `anim::anim` 唯一必需依赖是 [glm](https://github.com/g-truc/glm)
 - 核心代码不包含任何 bgfx / Unity 头文件，可独立编译与测试
@@ -157,13 +155,13 @@ build/samples/bgfx_demo/Release/bgfx_demo.exe --clip build/ab/Walk.ab `
 | 文档 | 内容 |
 |------|------|
 | [00-愿景与范围](docs/00-愿景与范围.md) | 目标、非目标、范围边界、术语 |
-| [01-总体架构](docs/01-总体架构.md) | 分层、模块依赖、数据流、更新循环、与 Animancer 对应 |
+| [01-总体架构](docs/01-总体架构.md) | 分层、模块依赖、数据流、更新循环、设计取舍 |
 | [02-核心数据类型](docs/02-核心数据类型.md) | glm 类型封装、Transform、Pool、序列化 |
 | [03-动画数据与曲线](docs/03-动画数据与曲线.md) | Keyframe/Curve(Unity Hermite)、Clip、事件、`.ab` 格式 |
 | [04-骨架与位姿](docs/04-骨架与位姿.md) | Skeleton/Bone/Pose、混合、调色板、根运动提取 |
 | [05-人形肌肉空间与重定向](docs/05-人形肌肉空间与重定向.md) | HumanBone、肌肉表、muscle↔local、T-Pose、IK、对拍 |
 | [06-Playable图](docs/06-Playable图.md) | Graph/Node/Handle/Output、加权、双阶段更新、命令 |
-| [07-Animancer门面](docs/07-Animancer门面.md) | Playable/Layer/State/StateDictionary/Transition/Fade/Events |
+| [07-门面层](docs/07-Animancer门面.md) | Playable/Layer/State/StateDictionary/Transition/Fade/Events |
 | [08-混合器](docs/08-混合器.md) | Manual/Linear/Directional/Cartesian 权重算法 |
 | [09-状态机FSM](docs/09-状态机FSM.md) | StateMachine、WithDefault、InputBuffer、StateChange |
 | [10-根运动与Animation-Jobs](docs/10-根运动与Animation-Jobs.md) | 根运动重定向、TwoBoneIK、Damping、Lean、Animated 属性 |
@@ -181,7 +179,7 @@ build/samples/bgfx_demo/Release/bgfx_demo.exe --clip build/ab/Walk.ab `
 - [x] P0 基础（core / clip / curve / 序列化）
 - [x] P1 骨架与位姿；便利功能（TimeSynchronizer、DirectionalAnimationSet、ExitEvent 等）
 - [x] P2 Playable 图
-- [x] P3 Animancer 门面 + 混合器 + CustomFade + ClipTransitionSequence
+- [x] P3 门面层 + 混合器 + CustomFade + ClipTransitionSequence
 - [x] P4 人形肌肉空间与 Unity 对拍（无 Editor 的 `.fbx.meta` 路径、RetargetFrom、IK goals）
 - [x] P5 FSM / 根运动 / Animation Jobs
 - [x] P6 `.anim` 转换器（`.ab` v3、批量、实测资源）
@@ -197,7 +195,3 @@ build/samples/bgfx_demo/Release/bgfx_demo.exe --clip build/ab/Walk.ab `
 - `RuntimeAnimatorController` / Animator 状态机 / Timeline / `PlayableAsset`
 - Unity 原生 `PlayableGraph` 句柄
 - 渲染、蒙皮着色器、物理模拟（只输出 Pose / 骨骼矩阵调色板）
-
-## 声明
-
-本项目是 Animancer 的独立 C++ 重实现，与原作者 Kybernetik 无隶属关系。仓库不包含 Unity Animancer Pro 资产；文档中的原项目源码/行号引用针对本地参考副本，需要自行持有相应授权。
